@@ -715,6 +715,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1336161844796650389, guid: 302f9270c40ea514c921b423eea7347c, type: 3}
+      propertyPath: m_MotionVectors
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336161844796650389, guid: 302f9270c40ea514c921b423eea7347c, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336161844796650389, guid: 302f9270c40ea514c921b423eea7347c, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336161844798844245, guid: 302f9270c40ea514c921b423eea7347c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336161844798844245, guid: 302f9270c40ea514c921b423eea7347c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3791735418282560858, guid: 302f9270c40ea514c921b423eea7347c, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3791735418282560858, guid: 302f9270c40ea514c921b423eea7347c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3791735418282560858, guid: 302f9270c40ea514c921b423eea7347c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3791735418282560858, guid: 302f9270c40ea514c921b423eea7347c, type: 3}
+      propertyPath: m_LayerOverridePriority
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6684317490783831274, guid: 302f9270c40ea514c921b423eea7347c, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -3633,9 +3669,14 @@ MonoBehaviour:
   craft_Building:
   - craftName: WoodenHouse
     build_Prefab: {fileID: 6080201519656460101, guid: 6a01faace8e424d49a56546260370a75, type: 3}
-    preview_Prefab: {fileID: 102149307270144720, guid: 71803cfd2cad2b041b61033bccdb267d, type: 3}
+    preview_Prefab: {fileID: 785584114881434716, guid: 38261afbfdb30f24c92ecbf3d1f67508, type: 3}
   go_Preview: {fileID: 102149307270144720, guid: 71803cfd2cad2b041b61033bccdb267d, type: 3}
-  Player_pos: {fileID: 1638716436}
+  go_Prefab: {fileID: 0}
+  Player_pos: {fileID: 963194228}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  range: 10
   isPreviewActivated: 0
 --- !u!114 &810945345
 MonoBehaviour:
@@ -4489,7 +4530,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 503
+    m_Bits: 1527
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -5926,7 +5967,7 @@ MonoBehaviour:
   jumpForce: 150
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 1079
   cameraContainer: {fileID: 1116035478}
   minXLook: -85
   maxXLook: 85
@@ -6152,6 +6193,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 30ef327c-b2d5-459e-9b56-c968329854ef
     m_ActionName: Player/Esc[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 810945345}
+        m_TargetAssemblyTypeName: CraftBtn, Assembly-CSharp
+        m_MethodName: OnBuildClick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 49f90724-3838-4e54-8bed-cacdc3a81e12
+    m_ActionName: Player/Build[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -6510,27 +6567,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5415c93866afd34d97bc7121df3dd61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1701613465 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6114180364263428603, guid: e3c2547620db6e54093860685b0e29e0, type: 3}
-  m_PrefabInstance: {fileID: 2475143796064120997}
-  m_PrefabAsset: {fileID: 0}
---- !u!208 &1701613466
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1701613465}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &1770122151
 GameObject:
   m_ObjectHideFlags: 0
@@ -8206,10 +8242,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6114180364263428603, guid: e3c2547620db6e54093860685b0e29e0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1701613466}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3c2547620db6e54093860685b0e29e0, type: 3}
 --- !u!1001 &2523588020342407605
 PrefabInstance:

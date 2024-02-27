@@ -65,7 +65,7 @@ public class Builder : MonoBehaviour
 
     public void Build()
     {
-        if (isPreviewActivated)
+        if (isPreviewActivated && go_Preview.GetComponent<PreviewObject>().IsBuildable())
         {
             Instantiate(go_Prefab, hitInfo.point, Quaternion.identity);
             Destroy(go_Preview);

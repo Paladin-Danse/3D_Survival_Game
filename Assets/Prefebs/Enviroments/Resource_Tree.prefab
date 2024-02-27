@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5329640586359706275}
   - component: {fileID: 3589084744384391812}
   - component: {fileID: 6177542249722770796}
+  - component: {fileID: 7162441611195289673}
   m_Layer: 8
   m_Name: Resource_Tree
   m_TagString: Untagged
@@ -25,7 +26,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6114180364263428603}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 19.153004, y: 0, z: -12.390946}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -33,6 +33,7 @@ Transform:
   m_Children:
   - {fileID: 7516540312642070464}
   m_Father: {fileID: 0}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3589084744384391812
 BoxCollider:
@@ -70,6 +71,22 @@ MonoBehaviour:
   itemToGive: {fileID: 11400000, guid: c2ab6602065c4e14485fc0966b1141e9, type: 2}
   quantityPerHit: 1
   capacity: 5
+--- !u!208 &7162441611195289673
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6114180364263428603}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &3390629974628936039
 PrefabInstance:
   m_ObjectHideFlags: 0
