@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Cabin.meta
+<<<<<<<< HEAD:Assets/Scenes/baedonggun.unity.meta
+guid: 3c6a67e7ac4c3d04cb3a7dd66806bca2
+========
 guid: f6f3a0dab8fa33241a4c19baf4f60041
 folderAsset: yes
-========
-guid: 57c33fa64b497d74bb1fb2cc2752c3c6
->>>>>>>> Dev:Assets/Scenes/AnimalTestScene.unity.meta
+>>>>>>>> CHS:Assets/Cabin.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scripts/Craft.meta
-guid: 17280b750cb0ee842af5b66bc8396fea
+<<<<<<<< HEAD:Assets/Prefebs/Animal.meta
+guid: 86edee54ff99e0c488088d73a0f83127
 ========
-guid: ee34b9327bf7f0b41b37baf39947c080
->>>>>>>> Dev:Assets/Prefebs/Animal.meta
+guid: 17280b750cb0ee842af5b66bc8396fea
+>>>>>>>> CHS:Assets/Scripts/UI/CraftUI.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
