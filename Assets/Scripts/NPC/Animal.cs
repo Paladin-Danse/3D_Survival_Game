@@ -1,115 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NPC : MonoBehaviour, IDamagable
+public enum AIState
 {
-    public AnimalData data;
-    private AIState aiState;
+    Idle,
+    Wandering,
+    Attacking,
+    RunAway,
+    Fleeing
+}
+
+public class Animal : MonoBehaviour, IDamagable
+{
+    [field: Header("References")]
+    [field: SerializeField] public AnimalData data { get; private set; }
+
+    [field: Header("Animations")]
+    [field: SerializeField] public AnimalAnimationData animationData { get; private set; }
+
+    public Rigidbody rigidbody { get; private set; }
+    public Animator animator { get; private set; }
+
+    private AnimalStateMachine stateMachine;
+    public NavMeshAgent agent;
+    private SkinnedMeshRenderer[] meshRenderers;
+
+    protected AIState aiState;
     private float lastAttackTime;
+    public float playerDistance { get; private set; }
     private Vector3 playerPos;
-    private float playerDistance;
-
-    public float fieldOfView = 120f;
-
-    private NavMeshAgent agent;
-    private Animator animator;
-    private SkinnedMeshRenderer[] meshRenderers;    
-
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+
+        stateMachine = new AnimalStateMachine(this);
     }
 
     private void Start()
     {
-        SetState(AIState.Wandering);
         playerPos = PlayerController.instance ? PlayerController.instance.transform.position : new Vector3(0, 0, 0);
+        stateMachine.ChangeState(stateMachine.idleState);
     }
 
     private void Update()
     {
-        
         playerDistance = Vector3.Distance(transform.position, playerPos);
-        
-        animator.SetBool("Moving", aiState != AIState.Idle);
 
-        switch (aiState)
-        {
-            case AIState.Idle: PassiveUpdate(); break;
-            case AIState.Wandering: PassiveUpdate(); break;
-            case AIState.Attacking: AttackingUpdate(); break;
-            case AIState.Fleeing: FleeingUpdate(); break;
-        }
+        //stateMachine.HandleInput();
+        stateMachine.Update();
     }
-
-    private void FleeingUpdate()
-    {
-        if (agent.remainingDistance < 0.1f)
-        {
-            agent.SetDestination(GetFleeLocation());
-        }
-        else
-        {
-            SetState(AIState.Wandering);
-        }
-    }
-
-    private void AttackingUpdate()
-    {
-        if (playerDistance > data.attackDistance || !IsPlaterInFireldOfView())
-        {
-            agent.isStopped = false;
-            NavMeshPath path = new NavMeshPath();
-            if (agent.CalculatePath(playerPos, path))
-            {
-                agent.SetDestination(playerPos);
-            }
-            else
-            {
-                SetState(AIState.Fleeing);
-            }
-        }
-        else
-        {
-            agent.isStopped = true;
-            if (Time.time - lastAttackTime > data.attackRate)
-            {
-                lastAttackTime = Time.time;
-                if(PlayerController.instance) PlayerController.instance.GetComponent<IDamagable>().TakePhysicalDamage(data.damage);
-                animator.speed = 1;
-                animator.SetTrigger("Attack");
-            }
-        }
-    }
-
-    private void PassiveUpdate()
-    {
-        if (aiState == AIState.Wandering && agent.remainingDistance < 0.1f)
-        {
-            SetState(AIState.Idle);
-            Invoke("WanderToNewLocation", Random.Range(data.minWanderWaitTime, data.maxWanderWaitTime));
-        }
-
-        if (playerDistance < data.detectDistance)
-        {
-            SetState(AIState.Attacking);
-        }
-    }
-
-    bool IsPlaterInFireldOfView()
-    {
-        Vector3 directionToPlayer = playerPos - transform.position;
-        float angle = Vector3.Angle(transform.forward, directionToPlayer);
-        return angle < fieldOfView * 0.5f;
-    }
-
-    private void SetState(AIState newState)
+    /*
+    protected void SetState(AIState newState)
     {
         aiState = newState;
         switch (aiState)
@@ -133,6 +78,12 @@ public class NPC : MonoBehaviour, IDamagable
                     agent.isStopped = false;
                 }
                 break;
+            case AIState.RunAway:
+                {
+                    agent.speed = data.runSpeed;
+                    agent.isStopped = false;
+                }
+                break;
             case AIState.Fleeing:
                 {
                     agent.speed = data.runSpeed;
@@ -143,17 +94,71 @@ public class NPC : MonoBehaviour, IDamagable
 
         animator.speed = agent.speed / data.walkSpeed;
     }
-
-    void WanderToNewLocation()
+    *///SetState();
+    public void FleeingUpdate()
     {
-        if (aiState != AIState.Idle)
+        if (agent.remainingDistance < 0.1f)
         {
-            return;
+            agent.SetDestination(GetFleeLocation());
         }
-        SetState(AIState.Wandering);
-        agent.SetDestination(GetWanderLocation());
+        else
+        {
+            stateMachine.ChangeState(stateMachine.wanderState);
+            //SetState(AIState.Wandering);
+        }
     }
 
+    public void AttackingUpdate()
+    {
+        if (playerDistance > data.attackDistance || !IsPlaterInFireldOfView())
+        {
+            agent.isStopped = false;
+            NavMeshPath path = new NavMeshPath();
+            if (agent.CalculatePath(playerPos, path))
+            {
+                agent.SetDestination(playerPos);
+            }
+            else
+            {
+                stateMachine.ChangeState(stateMachine.wanderState);
+                //SetState(AIState.Fleeing);
+            }
+        }
+        else
+        {
+            agent.isStopped = true;
+            if (Time.time - lastAttackTime > data.attackRate)
+            {
+                lastAttackTime = Time.time;
+                if (PlayerController.instance) PlayerController.instance.GetComponent<IDamagable>().TakePhysicalDamage(data.damage);
+                animator.speed = 1;
+                animator.SetTrigger("Attack");
+            }
+        }
+    }
+
+    //public void PassiveUpdate()
+    //{
+    //    if (agent.remainingDistance < 0.1f)
+    //    {
+    //        stateMachine.ChangeState(stateMachine.idleState);
+    //        //SetState(AIState.Idle);
+    //        Invoke("WanderToNewLocation", Random.Range(data.minWanderWaitTime, data.maxWanderWaitTime));
+    //    }
+
+    //    if (playerDistance < data.detectDistance)
+    //    {
+    //        stateMachine.ChangeState(stateMachine.attackState);
+    //        //SetState(AIState.Attacking);
+    //    }
+    //}
+
+    bool IsPlaterInFireldOfView()
+    {
+        Vector3 directionToPlayer = playerPos - transform.position;
+        float angle = Vector3.Angle(transform.forward, directionToPlayer);
+        return angle < data.fieldOfView * 0.5f;
+    }
 
     Vector3 GetWanderLocation()
     {
@@ -224,5 +229,18 @@ public class NPC : MonoBehaviour, IDamagable
         yield return new WaitForSeconds(0.1f);
         for (int x = 0; x < meshRenderers.Length; x++)
             meshRenderers[x].material.color = Color.white;
+    }
+
+    public void SetAgentMoveSpeed(float newSpeed, bool isStop)
+    {
+        agent.speed = newSpeed;
+        agent.isStopped = isStop;
+    }
+
+    public IEnumerator WanderToNewLocation()
+    {
+        yield return new WaitForSeconds(Random.Range(data.minWanderWaitTime, data.maxWanderWaitTime));
+        stateMachine.ChangeState(stateMachine.wanderState);
+        agent.SetDestination(GetWanderLocation());
     }
 }
