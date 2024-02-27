@@ -11,6 +11,13 @@ public class DayNightCycle : MonoBehaviour
     private float timeRate;
     public Vector3 noon;
 
+    //---------------------------------
+    public int damage;
+    public float damageRate;
+
+    private HashSet<IDamagable> thingsToDamage = new HashSet<IDamagable>();
+    //---------------------------------
+
     [Header("Sun")]
     public Light sun;
     public Gradient sunColor;
@@ -55,5 +62,38 @@ public class DayNightCycle : MonoBehaviour
             go.SetActive(false);
         else if(lightSource.intensity > 0 && !go.activeInHierarchy)
             go.SetActive(true);
+        InvokeRepeating("DealDamage", 0, damageRate); //코드 재사용
     }
+
+    //--------------------------------- 오브젝트의 플레이어를 찾아야 데미지를 입으려나
+    void DealDamage()
+    {
+        foreach (IDamagable damageable in thingsToDamage)
+        {
+            damageable.TakePhysicalDamage(damage);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out IDamagable damageable))
+        {
+            thingsToDamage.Add(damageable);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out IDamagable damageable))
+        {
+            thingsToDamage.Remove(damageable);
+        }
+    }
+    //---------------------------------
+
+
+
+
+
+
 }
