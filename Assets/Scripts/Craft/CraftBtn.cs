@@ -25,7 +25,7 @@ public class CraftBtn : MonoBehaviour
     }
     public void OnCraftPanelButton(InputAction.CallbackContext callbackContext)
     {
-        if (callbackContext.phase == InputActionPhase.Started)
+        if (callbackContext.phase == InputActionPhase.Started && !_builder.isPreviewActivated)
         {
             Toggle();
         }
@@ -36,6 +36,14 @@ public class CraftBtn : MonoBehaviour
         if (callbackContext.phase == InputActionPhase.Started)
         {
             Cancel();
+        }
+    }
+
+    public void OnBuildClick(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.phase == InputActionPhase.Started)
+        {
+            _builder.Build();
         }
     }
 
@@ -62,6 +70,7 @@ public class CraftBtn : MonoBehaviour
             Destroy(_builder.go_Preview);
             _builder.isPreviewActivated = false;
             _builder.go_Preview = null;
+            _builder.go_Prefab = null;
             CraftPanel.SetActive(false);
             onCancel?.Invoke();
             controller.ToggleCursor(false);

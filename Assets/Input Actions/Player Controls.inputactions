@@ -60,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Build",
+                    "name": "BuildMenu",
                     "type": "Button",
                     "id": "4facc47d-4275-4570-ba56-1404e701a3aa",
                     "expectedControlType": "Button",
@@ -72,6 +72,15 @@
                     "name": "Esc",
                     "type": "Button",
                     "id": "30ef327c-b2d5-459e-9b56-c968329854ef",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Build",
+                    "type": "Button",
+                    "id": "49f90724-3838-4e54-8bed-cacdc3a81e12",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -196,7 +205,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Build",
+                    "action": "BuildMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -208,6 +217,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Esc",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "65f52b1a-b59d-484d-8087-a2afc3b68d7a",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Build",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
