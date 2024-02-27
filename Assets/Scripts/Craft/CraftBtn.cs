@@ -8,23 +8,34 @@ using UnityEngine.Events;
 
 public class CraftBtn : MonoBehaviour
 {
-    [SerializeField] private GameObject CraftPanel;
+    [SerializeField] public GameObject CraftPanel; // °Ç¹° Áþ±â UI
 
     private PlayerController controller;
+    private Builder _builder;
 
     [Header("Events")]
     public UnityEvent onOpenCraftPanel;
     public UnityEvent onCloseCraftPanel;
+    public UnityEvent onCancel;
 
     void Awake()
     {        
-        controller = GetComponent<PlayerController>();        
+        controller = FindObjectOfType<PlayerController>();     
+        _builder = GetComponent<Builder>();
     }
     public void OnCraftPanelButton(InputAction.CallbackContext callbackContext)
     {
         if (callbackContext.phase == InputActionPhase.Started)
         {
             Toggle();
+        }
+    }
+
+    public void OnCancelButton(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.phase == InputActionPhase.Started)
+        {
+            Cancel();
         }
     }
 
@@ -42,5 +53,18 @@ public class CraftBtn : MonoBehaviour
             onOpenCraftPanel?.Invoke();
             controller.ToggleCursor(true);
         }
+    }
+
+    public void Cancel()
+    {
+        if (_builder.isPreviewActivated == true)
+        {
+            Destroy(_builder.go_Preview);
+            _builder.isPreviewActivated = false;
+            _builder.go_Preview = null;
+            CraftPanel.SetActive(false);
+            onCancel?.Invoke();
+            controller.ToggleCursor(false);
+        }                    
     }
 }
