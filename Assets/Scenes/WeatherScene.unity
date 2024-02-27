@@ -4311,21 +4311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ddf8ee5b20dbdf4ab942d6a6a8002a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 6
-  walkSpeed: 1
-  runSpeed: 4
-  dropOnDeath:
-  - {fileID: 11400000, guid: 1b8110232980d6e469ed5a93781e00c2, type: 2}
-  - {fileID: 11400000, guid: 1b8110232980d6e469ed5a93781e00c2, type: 2}
-  detectDistance: 5
-  safeDistance: 8
-  minWanderDistance: 5
-  maxWanderDistance: 10
-  minWanderWaitTime: 1
-  maxWanderWaitTime: 2
-  damage: 5
-  attackRate: 1.5
-  attackDistance: 2
+  data: {fileID: 0}
   fieldOfView: 120
 --- !u!4 &1311995732 stripped
 Transform:
@@ -6910,6 +6896,67 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1001 &1497371062213548845
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1740671917419018170, guid: 321e2787274292b468ec7d6b8b64b115, type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740671917419018170, guid: 321e2787274292b468ec7d6b8b64b115, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740671917419018170, guid: 321e2787274292b468ec7d6b8b64b115, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740671917419018170, guid: 321e2787274292b468ec7d6b8b64b115, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740671917419018170, guid: 321e2787274292b468ec7d6b8b64b115, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740671917419018170, guid: 321e2787274292b468ec7d6b8b64b115, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740671917419018170, guid: 321e2787274292b468ec7d6b8b64b115, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740671917419018170, guid: 321e2787274292b468ec7d6b8b64b115, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740671917419018170, guid: 321e2787274292b468ec7d6b8b64b115, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740671917419018170, guid: 321e2787274292b468ec7d6b8b64b115, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740671917419018170, guid: 321e2787274292b468ec7d6b8b64b115, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8248433260890281554, guid: 321e2787274292b468ec7d6b8b64b115, type: 3}
+      propertyPath: m_Name
+      value: RainFall
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 321e2787274292b468ec7d6b8b64b115, type: 3}
 --- !u!1001 &1630053670065984764
 PrefabInstance:
   m_ObjectHideFlags: 0
