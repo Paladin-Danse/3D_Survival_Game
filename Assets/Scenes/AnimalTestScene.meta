@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/AnimalTestScene.meta
 guid: f298bacb7e8fb574eb93621b95d6c753
+========
+guid: 53668c7e169529c45ba077d0ba11f73f
+>>>>>>>> CHS:Assets/_TerrainAutoUpgrade.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
