@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public enum AIState
     RunAway,
     Fleeing
 }
-
+[Serializable]
 public class Animal : MonoBehaviour, IDamagable
 {
     [field: Header("References")]
@@ -28,11 +29,16 @@ public class Animal : MonoBehaviour, IDamagable
     private SkinnedMeshRenderer[] meshRenderers;
 
     protected AIState aiState;
-    private float lastAttackTime;
+    public float lastAttackTime { get; set; }
     public float playerDistance { get; private set; }
-    private Vector3 playerPos;
+    [field: SerializeField] public Vector3 playerPos { get; private set; }
+    private int health;
+    protected event Action OnDie;
+    public bool IsDead => health == 0;
     private void Awake()
     {
+        animationData.Initialize();
+
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
@@ -44,6 +50,9 @@ public class Animal : MonoBehaviour, IDamagable
     {
         playerPos = PlayerController.instance ? PlayerController.instance.transform.position : new Vector3(0, 0, 0);
         stateMachine.ChangeState(stateMachine.idleState);
+        health = data.maxHealth;
+
+        OnDie += Die;
     }
 
     private void Update()
@@ -95,47 +104,7 @@ public class Animal : MonoBehaviour, IDamagable
         animator.speed = agent.speed / data.walkSpeed;
     }
     *///SetState();
-    public void FleeingUpdate()
-    {
-        if (agent.remainingDistance < 0.1f)
-        {
-            agent.SetDestination(GetFleeLocation());
-        }
-        else
-        {
-            stateMachine.ChangeState(stateMachine.wanderState);
-            //SetState(AIState.Wandering);
-        }
-    }
-
-    public void AttackingUpdate()
-    {
-        if (playerDistance > data.attackDistance || !IsPlaterInFireldOfView())
-        {
-            agent.isStopped = false;
-            NavMeshPath path = new NavMeshPath();
-            if (agent.CalculatePath(playerPos, path))
-            {
-                agent.SetDestination(playerPos);
-            }
-            else
-            {
-                stateMachine.ChangeState(stateMachine.wanderState);
-                //SetState(AIState.Fleeing);
-            }
-        }
-        else
-        {
-            agent.isStopped = true;
-            if (Time.time - lastAttackTime > data.attackRate)
-            {
-                lastAttackTime = Time.time;
-                if (PlayerController.instance) PlayerController.instance.GetComponent<IDamagable>().TakePhysicalDamage(data.damage);
-                animator.speed = 1;
-                animator.SetTrigger("Attack");
-            }
-        }
-    }
+    
 
     //public void PassiveUpdate()
     //{
@@ -153,61 +122,31 @@ public class Animal : MonoBehaviour, IDamagable
     //    }
     //}
 
-    bool IsPlaterInFireldOfView()
-    {
-        Vector3 directionToPlayer = playerPos - transform.position;
-        float angle = Vector3.Angle(transform.forward, directionToPlayer);
-        return angle < data.fieldOfView * 0.5f;
-    }
-
     Vector3 GetWanderLocation()
     {
         NavMeshHit hit;
 
-        NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * Random.Range(data.minWanderDistance, data.maxWanderDistance)), out hit, data.maxWanderDistance, NavMesh.AllAreas);
+        NavMesh.SamplePosition(transform.position + (UnityEngine.Random.onUnitSphere * UnityEngine.Random.Range(data.minWanderDistance, data.maxWanderDistance)), out hit, data.maxWanderDistance, NavMesh.AllAreas);
 
         int i = 0;
         while (Vector3.Distance(transform.position, hit.position) < data.detectDistance)
         {
-            NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * Random.Range(data.minWanderDistance, data.maxWanderDistance)), out hit, data.maxWanderDistance, NavMesh.AllAreas);
+            NavMesh.SamplePosition(transform.position + (UnityEngine.Random.onUnitSphere * UnityEngine.Random.Range(data.minWanderDistance, data.maxWanderDistance)), out hit, data.maxWanderDistance, NavMesh.AllAreas);
             i++;
             if (i == 30)
                 break;
         }
 
         return hit.position;
-    }
-
-    Vector3 GetFleeLocation()
-    {
-        NavMeshHit hit;
-
-        NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * data.safeDistance), out hit, data.maxWanderDistance, NavMesh.AllAreas);
-
-        int i = 0;
-        while (GetDestinationAngle(hit.position) > 90 || playerDistance < data.safeDistance)
-        {
-
-            NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * data.safeDistance), out hit, data.maxWanderDistance, NavMesh.AllAreas);
-            i++;
-            if (i == 30)
-                break;
-        }
-
-        return hit.position;
-    }
-
-    float GetDestinationAngle(Vector3 targetPos)
-    {
-        return Vector3.Angle(transform.position - playerPos, transform.position + targetPos);
     }
 
     public void TakePhysicalDamage(int damageAmount)
     {
-        data.maxHealth -= damageAmount;
-        if (data.maxHealth <= 0)
-            Die();
+        if (health == 0) return;
+        health = Mathf.Max(health -= damageAmount, 0);
 
+        if (health == 0) OnDie?.Invoke();
+        
         StartCoroutine(DamageFlash());
     }
 
@@ -221,16 +160,6 @@ public class Animal : MonoBehaviour, IDamagable
         Destroy(gameObject);
     }
 
-    IEnumerator DamageFlash()
-    {
-        for (int x = 0; x < meshRenderers.Length; x++)
-            meshRenderers[x].material.color = new Color(1.0f, 0.6f, 0.6f);
-
-        yield return new WaitForSeconds(0.1f);
-        for (int x = 0; x < meshRenderers.Length; x++)
-            meshRenderers[x].material.color = Color.white;
-    }
-
     public void SetAgentMoveSpeed(float newSpeed, bool isStop)
     {
         agent.speed = newSpeed;
@@ -239,8 +168,18 @@ public class Animal : MonoBehaviour, IDamagable
 
     public IEnumerator WanderToNewLocation()
     {
-        yield return new WaitForSeconds(Random.Range(data.minWanderWaitTime, data.maxWanderWaitTime));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(data.minWanderWaitTime, data.maxWanderWaitTime));
         stateMachine.ChangeState(stateMachine.wanderState);
         agent.SetDestination(GetWanderLocation());
+        stateMachine.AnimationCoroutine = null;
+    }
+    IEnumerator DamageFlash()
+    {
+        for (int x = 0; x < meshRenderers.Length; x++)
+            meshRenderers[x].material.color = new Color(1.0f, 0.6f, 0.6f);
+
+        yield return new WaitForSeconds(0.1f);
+        for (int x = 0; x < meshRenderers.Length; x++)
+            meshRenderers[x].material.color = Color.white;
     }
 }
