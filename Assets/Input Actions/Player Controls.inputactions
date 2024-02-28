@@ -60,9 +60,45 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Build",
+                    "name": "BuildMenu",
                     "type": "Button",
                     "id": "4facc47d-4275-4570-ba56-1404e701a3aa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Esc",
+                    "type": "Button",
+                    "id": "30ef327c-b2d5-459e-9b56-c968329854ef",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Build",
+                    "type": "Button",
+                    "id": "49f90724-3838-4e54-8bed-cacdc3a81e12",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "BuildRotationQ",
+                    "type": "Button",
+                    "id": "8adb3bd3-6c15-4505-84bb-61a64e11241c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "BuildRotationE",
+                    "type": "Button",
+                    "id": "97075ce9-20c7-4fc5-8ff9-27409ff0d2a4",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -187,7 +223,51 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "BuildMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9175598c-7931-4f65-b1b6-420626e85a58",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Esc",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "65f52b1a-b59d-484d-8087-a2afc3b68d7a",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Build",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aa499c01-bd4c-4f8a-b226-2acf139ee0cc",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BuildRotationE",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5247c72a-403f-4a83-a4fc-9e7c86542215",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BuildRotationQ",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
