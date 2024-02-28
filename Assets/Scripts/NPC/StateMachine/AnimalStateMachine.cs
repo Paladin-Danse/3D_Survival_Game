@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AnimalStateMachine : StateMachine
 {
     public Animal animal;
 
     public IDamagable Target;
-
+    public IEnumerator AnimationCoroutine;
     public AnimalIdleState idleState;
     public AnimalAttackState attackState;
     public AnimalRunAwayState runAwayState;
     public AnimalWanderState wanderState;
     public AnimalFleeState fleeState;
+
+    
     public AnimalStateMachine(Animal animal)
     {
         this.animal = animal;
@@ -22,5 +25,7 @@ public class AnimalStateMachine : StateMachine
         runAwayState = new AnimalRunAwayState(this);
         wanderState = new AnimalWanderState(this);
         fleeState = new AnimalFleeState(this);
+
+        AnimationCoroutine = null;
     }
 }
