@@ -5019,7 +5019,7 @@ Transform:
   m_Children:
   - {fileID: 6628550641196398205}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &3468127162872419746
 CapsuleCollider:

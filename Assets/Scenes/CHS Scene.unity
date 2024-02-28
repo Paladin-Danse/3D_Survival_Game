@@ -2972,6 +2972,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2db2d65dcdca28b4e8d31cef94b04ab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  craft_Building:
+  - Bdata: {fileID: 11400000, guid: ec4bfcb0b7ba3214aaf2cd09bb6e7d93, type: 2}
+  - Bdata: {fileID: 11400000, guid: 2e0db85c80409d046a02729f7f00332b, type: 2}
   go_Preview: {fileID: 102149307270144720, guid: 71803cfd2cad2b041b61033bccdb267d, type: 3}
   go_Prefab: {fileID: 0}
   Player_pos: {fileID: 963194228}
@@ -2993,6 +2996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CraftPanel: {fileID: 1101318592}
+  Brotation: {x: 0, y: 0, z: 0}
   onOpenCraftPanel:
     m_PersistentCalls:
       m_Calls: []
@@ -5520,6 +5524,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 49f90724-3838-4e54-8bed-cacdc3a81e12
     m_ActionName: Player/Build[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 810945345}
+        m_TargetAssemblyTypeName: BuildBtn, Assembly-CSharp
+        m_MethodName: OnBuildingRotateQ
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8adb3bd3-6c15-4505-84bb-61a64e11241c
+    m_ActionName: Player/BuildRotation[/Keyboard/q,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 810945345}
+        m_TargetAssemblyTypeName: BuildBtn, Assembly-CSharp
+        m_MethodName: OnBuildingRotateE
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 97075ce9-20c7-4fc5-8ff9-27409ff0d2a4
+    m_ActionName: Player/BuildRotationE[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

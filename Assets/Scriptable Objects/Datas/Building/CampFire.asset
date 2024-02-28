@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ece41e17ec3cdf841b0103411aa9f6bb, type: 3}
   m_Name: CampFire
   m_EditorClassIdentifier: 
-  BuildingName: 
-  description: 
-  icon: {fileID: 0}
-  build_Prefab: {fileID: 0}
-  preview_Prefab: {fileID: 0}
-  buildingNumber: 0
+  BuildingName: "\uBAA8\uB2E5\uBD88"
+  description: "\uD65C\uD65C \uD0C0\uC624\uB974\uB294 \uBAA8\uB2E5\uBD88"
+  icon: {fileID: 21300000, guid: f465d35b1442d304ba4c23e100109b43, type: 3}
+  build_Prefab: {fileID: 8885786520710590625, guid: 478781847010a034d9642d62e4f8d99a, type: 3}
+  preview_Prefab: {fileID: 8885786520710590625, guid: ba38a5a8f2a1e7f48958d03ebcf5925f, type: 3}
+  buildingNumber: 1

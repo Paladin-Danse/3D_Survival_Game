@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ece41e17ec3cdf841b0103411aa9f6bb, type: 3}
   m_Name: WoodenHouse
   m_EditorClassIdentifier: 
-  BuildingName: 
-  description: 
-  icon: {fileID: 0}
-  buildButton: {fileID: 0}
+  BuildingName: "\uB098\uBB34 \uC9D1"
+  description: "\uC870\uC7A1\uD558\uAC8C \uC9C0\uC5B4\uC9C4 \uB098\uBB34 \uC9D1"
+  icon: {fileID: 21300000, guid: eee51c77f5fd40042b2d2347546a7357, type: 3}
+  build_Prefab: {fileID: 6080201519656460101, guid: 6a01faace8e424d49a56546260370a75, type: 3}
+  preview_Prefab: {fileID: 785584114881434716, guid: 38261afbfdb30f24c92ecbf3d1f67508, type: 3}
+  buildingNumber: 0

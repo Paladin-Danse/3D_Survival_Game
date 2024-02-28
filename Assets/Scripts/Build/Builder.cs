@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 using static UnityEditor.Timeline.TimelinePlaybackControls;
+using static UnityEngine.InputSystem.InputAction;
 
 [System.Serializable]
 public class Building
@@ -60,6 +62,8 @@ public class Builder : MonoBehaviour
             if(hitInfo.transform != null)
             {
                 Vector3 _location = hitInfo.point;
+                go_Preview.transform.localEulerAngles = buildBtn.Brotation;
+                _location.Set(Mathf.Round(_location.x), Mathf.Round(_location.y / 0.1f) * 0.1f, Mathf.Round(_location.z));
                 go_Preview.transform.position = _location;
             }
         }
@@ -69,7 +73,7 @@ public class Builder : MonoBehaviour
     {
         if (isPreviewActivated && go_Preview.GetComponent<PreviewObject>().IsBuildable())
         {
-            Instantiate(go_Prefab, hitInfo.point, Quaternion.identity);
+            Instantiate(go_Prefab, go_Preview.transform.position, go_Preview.transform.rotation);
             Destroy(go_Preview);
             isPreviewActivated = false;
             go_Preview = null;

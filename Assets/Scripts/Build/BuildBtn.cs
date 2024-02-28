@@ -5,10 +5,13 @@ using UnityEngine.InputSystem.XR;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
 using UnityEngine.Events;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class BuildBtn : MonoBehaviour
 {
     [SerializeField] public GameObject CraftPanel; // °Ç¹° Áþ±â UI
+
+    public Vector3 Brotation = new Vector3(0f, 0f, 0f);
 
     private PlayerController controller;
     private Builder _builder;
@@ -75,5 +78,21 @@ public class BuildBtn : MonoBehaviour
             onCancel?.Invoke();
             controller.ToggleCursor(false);
         }                    
+    }
+
+    public void OnBuildingRotateQ(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.phase == InputActionPhase.Started)
+        {
+            Brotation += new Vector3(0f, -45f, 0f);
+        }
+    }
+
+    public void OnBuildingRotateE(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.phase == InputActionPhase.Started)
+        {
+            Brotation += new Vector3(0f, +45f, 0f);
+        }
     }
 }
