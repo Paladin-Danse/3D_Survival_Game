@@ -28,7 +28,8 @@ public class Builder : MonoBehaviour
     [SerializeField] private float range;    
 
     BuildBtn buildBtn;
-    PlayerController controller;    
+    PlayerController controller;
+    Inventory inven;
 
     public bool isPreviewActivated = false;
 
@@ -36,6 +37,7 @@ public class Builder : MonoBehaviour
     {
         buildBtn = GetComponent<BuildBtn>();
         controller = FindObjectOfType<PlayerController>();
+        inven = Inventory.instance;
     }    
 
     public void SlotClick(int _slotNum)
@@ -45,6 +47,11 @@ public class Builder : MonoBehaviour
         isPreviewActivated = true;
         controller.ToggleCursor(false);
         buildBtn.CraftPanel.SetActive(false);
+
+        //if (craft_Building[0].Bdata.ingredientItem[0].ingreItem.displayName == inven.slots[0].item.displayName)
+        //{
+
+        //}
     }
         
     void Update()
@@ -70,7 +77,7 @@ public class Builder : MonoBehaviour
     }
 
     public void Build()
-    {
+    {        
         if (isPreviewActivated && go_Preview.GetComponent<PreviewObject>().IsBuildable())
         {
             Instantiate(go_Prefab, go_Preview.transform.position, go_Preview.transform.rotation);

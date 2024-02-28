@@ -13,4 +13,11 @@ public class BuildingData : ScriptableObject
     public GameObject build_Prefab;
     public GameObject preview_Prefab;
     public int buildingNumber;
+    public List<IngredientItem> ingredientItem = new List<IngredientItem>();    
+}
+
+public class IngredientItem
+{
+    public ItemData ingreItem;
+    public int ingreItemCount;
 }
