@@ -23,7 +23,7 @@ public class WeatherManager : MonoBehaviour
     public enum Weather {SUNNY, RAIN }
     public Weather currentWeather;
     public ParticleSystem rain;
-    public float weather_time = 10f;
+    public float weather_time = 55f;
     public int next_weather;
 
     void Start()
@@ -60,7 +60,7 @@ public class WeatherManager : MonoBehaviour
             {
                 next_weather = Random.Range(0, 2);
                 ChangeWeather(Weather.RAIN);
-                weather_time = 10f;
+                weather_time = 55f;
             }
         }
         if (next_weather == 0)
@@ -69,7 +69,7 @@ public class WeatherManager : MonoBehaviour
             {
                 next_weather = Random.Range(0, 2);
                 ChangeWeather(Weather.SUNNY);
-                weather_time = 10f;
+                weather_time = 55f;
             }
         }
     }
