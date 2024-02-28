@@ -1,46 +1,48 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.UI;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 [System.Serializable]
-public class Craft
+public class Building
 {
-    public string craftName;
-    public GameObject build_Prefab;
-    public GameObject preview_Prefab;
+    public BuildingData Bdata;
 }
 public class Builder : MonoBehaviour
 {
-    [SerializeField] private Craft[] craft_Building;
+    [SerializeField] public Building[] craft_Building;
 
     [HideInInspector] public GameObject go_Preview;
     [HideInInspector] public GameObject go_Prefab;
 
-    [SerializeField] private Transform Player_pos;
+    [SerializeField] private Transform Player_pos;    
 
     private RaycastHit hitInfo;
     [SerializeField] private LayerMask layerMask;
-    [SerializeField] private float range;
+    [SerializeField] private float range;    
 
-    CraftBtn craftBtn;
-    PlayerController controller;
+    BuildBtn buildBtn;
+    PlayerController controller;    
 
     public bool isPreviewActivated = false;
 
     private void Awake()
     {
-        craftBtn = GetComponent<CraftBtn>();
+        buildBtn = GetComponent<BuildBtn>();
         controller = FindObjectOfType<PlayerController>();
-    }
+    }    
+
     public void SlotClick(int _slotNum)
     {
-        go_Preview = Instantiate(craft_Building[_slotNum].preview_Prefab, Player_pos.position + Player_pos.forward, Quaternion.identity);
-        go_Prefab = craft_Building[_slotNum].build_Prefab;
+        go_Preview = Instantiate(craft_Building[_slotNum].Bdata.preview_Prefab, Player_pos.position + Player_pos.forward, Quaternion.identity);
+        go_Prefab = craft_Building[_slotNum].Bdata.build_Prefab;
         isPreviewActivated = true;
         controller.ToggleCursor(false);
-        craftBtn.CraftPanel.SetActive(false);
+        buildBtn.CraftPanel.SetActive(false);
     }
         
     void Update()
@@ -73,5 +75,5 @@ public class Builder : MonoBehaviour
             go_Preview = null;
             go_Prefab = null;
         }
-    }
+    }    
 }

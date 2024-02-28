@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using Unity.VisualScripting;
 using UnityEngine.Events;
 
-public class CraftBtn : MonoBehaviour
+public class BuildBtn : MonoBehaviour
 {
     [SerializeField] public GameObject CraftPanel; // °Ç¹° Áþ±â UI
 
