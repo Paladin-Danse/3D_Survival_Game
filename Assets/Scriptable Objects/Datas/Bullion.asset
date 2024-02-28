@@ -10,18 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f092584c9ddce0d46894d560f6e3996b, type: 3}
-  m_Name: RedPotion
+  m_Name: Bullion
   m_EditorClassIdentifier: 
-  displayName: "\uBE68\uAC04\uD3EC\uC158"
-  description: "\uCCB4\uB825\uC744 \uB9CE\uC774 \uD68C\uBCF5\uD569\uB2C8\uB2E4"
-  type: 2
-  icon: {fileID: 21300000, guid: 61bb0bab92d37574ea60111373fe1a1b, type: 3}
+  displayName: "\uAE08\uAD34"
+  description: "\uC81C\uC870\uD14C\uC2A4\uD2B8"
+  type: 0
+  icon: {fileID: 0}
   dropPrefab: {fileID: 0}
   canStack: 0
   maxStackAmount: 0
-  consumables:
-  - type: 1
-    value: 50
-  - type: 0
-    value: 5
+  consumables: []
   equipPrefab: {fileID: 0}

@@ -8,16 +8,15 @@ using static UnityEditor.Progress;
 public class CraftTools : MonoBehaviour , IInteractable
 {
     public ToolData tool;
+    public ItemCraft ItemCraft; 
 
     public string GetInteractPrompt()
     {
-        return string.Format(" 사용하기 {0}", tool.displayName);
+        return string.Format(" 사용하기 {0}"+ "<color=yellow>" + "(E)" + "</color>", tool.displayName);
     }
 
     public void OnInteract()
     {
-        Debug.Log("작동!");
+        ItemCraft.craftWindow.SetActive(true);
     }
-
-    
 }
