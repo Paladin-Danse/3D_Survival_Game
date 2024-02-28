@@ -5,15 +5,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum AIState
-{
-    Idle,
-    Wandering,
-    Attacking,
-    Fleeing
-}
-
-
 public class NPC : MonoBehaviour, IDamagable
 {
     public AnimalData data;
