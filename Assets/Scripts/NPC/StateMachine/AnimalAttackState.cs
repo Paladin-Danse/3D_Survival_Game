@@ -36,6 +36,8 @@ public class AnimalAttackState : AnimalBaseState
 
         if (animal.playerDistance > animal.data.attackDistance || !IsPlaterInFireldOfView())
         {
+            if (animal.animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) return;
+
             agent.isStopped = false;
             NavMeshPath path = new NavMeshPath();
             if (agent.CalculatePath(animal.playerPos, path))
@@ -44,7 +46,7 @@ public class AnimalAttackState : AnimalBaseState
             }
             else
             {
-                stateMachine.ChangeState(stateMachine.wanderState);
+                stateMachine.ChangeState(stateMachine.fleeState);
                 //SetState(AIState.Fleeing);
             }
         }

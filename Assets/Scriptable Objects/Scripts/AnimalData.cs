@@ -30,4 +30,5 @@ public class AnimalData : ScriptableObject
     public float attackRate;
     private float lastAttackTime;
     public float attackDistance;
+    public float deathToTime;
 }

@@ -16,6 +16,7 @@ public class BuildingData : ScriptableObject
     public List<IngredientItem> ingredientItem = new List<IngredientItem>();    
 }
 
+[System.Serializable]
 public class IngredientItem
 {
     public ItemData ingreItem;
