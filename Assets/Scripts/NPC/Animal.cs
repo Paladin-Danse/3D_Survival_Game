@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Properties;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -157,7 +158,7 @@ public class Animal : MonoBehaviour, IDamagable
             Instantiate(data.dropOnDeath[x].dropPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public void SetAgentMoveSpeed(float newSpeed, bool isStop)
@@ -181,5 +182,23 @@ public class Animal : MonoBehaviour, IDamagable
         yield return new WaitForSeconds(0.1f);
         for (int x = 0; x < meshRenderers.Length; x++)
             meshRenderers[x].material.color = Color.white;
+    }
+
+    IEnumerator DeathAnimation()
+    {
+        //죽는 애니메이션이 올때까지 기다리고
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsTag("Death"))
+        {
+            yield return null;
+        }
+        //죽는 애니메이션이 끝나면
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            yield return null;
+        }
+        //죽은 뒤 소멸시간까지 기다렸다가
+        yield return new WaitForSeconds(data.deathToTime);
+        //게임에서 제거
+        gameObject.SetActive(false);
     }
 }

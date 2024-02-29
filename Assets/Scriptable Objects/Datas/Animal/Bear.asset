@@ -30,3 +30,4 @@ MonoBehaviour:
   damage: 5
   attackRate: 1.5
   attackDistance: 2
+  deathToTime: 2

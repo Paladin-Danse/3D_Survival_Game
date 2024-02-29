@@ -18,3 +18,6 @@ MonoBehaviour:
   build_Prefab: {fileID: 8885786520710590625, guid: 478781847010a034d9642d62e4f8d99a, type: 3}
   preview_Prefab: {fileID: 8885786520710590625, guid: ba38a5a8f2a1e7f48958d03ebcf5925f, type: 3}
   buildingNumber: 1
+  ingredientItem:
+  - ingreItem: {fileID: 11400000, guid: c2ab6602065c4e14485fc0966b1141e9, type: 2}
+    ingreItemCount: 1
