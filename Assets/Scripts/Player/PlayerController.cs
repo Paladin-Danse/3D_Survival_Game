@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector]
     public bool canLook = true;
+    public bool canJump = true;
+    public bool canMove = true;
 
     private Rigidbody _rigidbody;
 
@@ -126,4 +128,5 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
     }
+
 }
