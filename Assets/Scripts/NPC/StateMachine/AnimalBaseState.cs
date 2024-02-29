@@ -12,6 +12,7 @@ public class AnimalBaseState : IState
     {
         stateMachine = animalstateMachine;
     }
+    public bool IsAlertEnd = false;
 
     public virtual void Enter()
     {
@@ -39,13 +40,11 @@ public class AnimalBaseState : IState
     }
     protected void StartAnimation(int animationHash)
     {
-        Debug.Log(animationHash);
         stateMachine.animal.animator.SetBool(animationHash, true);
     }
 
     protected void StopAnimation(int animationHash)
     {
-        Debug.Log(animationHash);
         stateMachine.animal.animator.SetBool(animationHash, false);
     }
 
@@ -73,7 +72,6 @@ public class AnimalBaseState : IState
                     stateMachine.AnimationCoroutine = BarkAnimation();
                     stateMachine.animal.StartCoroutine(stateMachine.AnimationCoroutine);
                 }
-                
             }
         }
     }
@@ -83,12 +81,30 @@ public class AnimalBaseState : IState
         stateMachine.animal.agent.isStopped = true;
         stateMachine.animal.animator.SetTrigger(stateMachine.animal.animationData.AlertParameterHash);
 
-        AnimatorStateInfo info = stateMachine.animal.animator.GetCurrentAnimatorStateInfo(0);
-        while ((info.normalizedTime < 1.0f && info.normalizedTime > 0.0f) || info.IsName("Alert"))
+        while (!stateMachine.animal.animator.GetCurrentAnimatorStateInfo(0).IsTag("Run"))
         {
             yield return null;
         }
+
         stateMachine.animal.agent.isStopped = false;
         stateMachine.ChangeState(stateMachine.attackState);
     }
+    //protected float GetNormalizedTime(Animator animator, string tag)
+    //{
+    //    AnimatorStateInfo currentInfo = animator.GetCurrentAnimatorStateInfo(0);
+    //    AnimatorStateInfo nextInfo = animator.GetNextAnimatorStateInfo(0);
+
+    //    if (animator.IsInTransition(0) && nextInfo.IsTag(tag))
+    //    {
+    //        return nextInfo.normalizedTime;
+    //    }
+    //    else if (!animator.IsInTransition(0) && currentInfo.IsTag(tag))
+    //    {
+    //        return currentInfo.normalizedTime;
+    //    }
+    //    else
+    //    {
+    //        return 0f;
+    //    }
+    //}
 }
