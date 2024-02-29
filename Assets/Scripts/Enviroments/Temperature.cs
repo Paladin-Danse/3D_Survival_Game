@@ -5,21 +5,20 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Weather : MonoBehaviour
+public class Temperature : MonoBehaviour
 {
     [SerializeField] GameObject weatherRain;
     [SerializeField] GameObject weatherSun;
-    [SerializeField] GameObject thermometer;
     [SerializeField] public TextMeshProUGUI temperatureText;
 
     public int damage;
     public float damageRate;
 
-    [HideInInspector] public int temperature;
+    [HideInInspector] public int temperature = 15;
 
     private HashSet<IDamagable> temperatureToDamage = new HashSet<IDamagable>();
 
-    public static Weather _instance;
+    public static Temperature _instance;
     private void Awake()
     {
         if (_instance != null)
@@ -86,17 +85,39 @@ public class Weather : MonoBehaviour
         float sunTime = sunIntensity.Evaluate(time);
         float moonTime = moonIntensity.Evaluate(time);
 
+        //Weather weatherValue = WeatherManager.instance.currentWeather;
+
         if(moonTime == 0)
         {
-            temperature = sunTime * 15f + 15f;
+            temperature = (1 + sunTime) * 15f;
+
+            //if(weatherValue == Weather.RAIN)
+            //{
+            //    temperature = (1 + sunTime) * 15f - 10f;
+            //}
         }
-        
+            
         if(sunTime == 0)
         {
-            temperature = 15f - moonTime * 15f;
+            temperature = (1 - moonTime) * 15f;
+
+            //if(weatherValue == Weather.RAIN)
+            //{
+            //    temperature = (1 + sunTime) * 15f - 10f;
+            //}
         }
         
-        
+        //if (weatherValue == Weather.RAIN)
+        //{
+        //    weatherRain.SetActive(true);
+        //    weatherSun.SetActive(false);
+        //}
+        //else
+        //{
+        //    weatherRain.SetActive(false);
+        //    weatherSun.SetActive(true);
+        //}
+
         return (int)temperature;
     }
 }
