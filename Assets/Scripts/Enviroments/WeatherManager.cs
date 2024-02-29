@@ -26,10 +26,14 @@ public class WeatherManager : MonoBehaviour
     public float weather_time = 55f;
     public int next_weather;
 
+    public ParticleSystem lightning;
+    public bool playlightning = true;
+
     void Start()
     {
         currentWeather = Weather.SUNNY;
         next_weather = 1;
+
     }
 
     public void ChangeWeather(Weather weatherType)
@@ -41,10 +45,12 @@ public class WeatherManager : MonoBehaviour
                 case Weather.SUNNY:
                     currentWeather = Weather.SUNNY;
                     this.rain.Stop();
+                    this.lightning.Stop();
                     break;
                 case Weather.RAIN:
                     currentWeather = Weather.RAIN;
                     this.rain.Play();
+                    this.lightning.Play();
                     break;
             }
         }
@@ -61,6 +67,7 @@ public class WeatherManager : MonoBehaviour
                 next_weather = Random.Range(0, 2);
                 ChangeWeather(Weather.RAIN);
                 weather_time = 55f;
+
             }
         }
         if (next_weather == 0)
