@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
     }
-    //¸ðµç ÀÛ¾÷ÀÌ ³¡³ª°í ½ÇÇà.»ç¿ëex)Ä«¸Þ¶ó ¹«ºê
+    //ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.ï¿½ï¿½ï¿½ex)Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void LateUpdate()
     {
         if(canLook)

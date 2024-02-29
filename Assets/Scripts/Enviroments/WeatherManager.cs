@@ -2,25 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Weather { SUNNY, RAIN }
+
 public class WeatherManager : MonoBehaviour
 {
-    //static public WeatherManager instance;
+    static public WeatherManager instance;
 
-    //private void Awake()
-    //{
-    //    if (instance == null)
-    //    {
-    //        DontDestroyOnLoad(this.gameObject);
-    //        instance = this;
-    //    }
-    //    else
-    //    {
-    //        Destroy(this.gameObject);
-    //    }
-    //}
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
-
-    public enum Weather {SUNNY, RAIN }
     public Weather currentWeather;
     public ParticleSystem rain;
     public float weather_time = 55f;
