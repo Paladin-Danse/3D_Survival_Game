@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -40,16 +41,22 @@ public class PlayerConditions : MonoBehaviour, IDamagable
 {
     public Condition health;
     public Condition hunger;
+    public Condition thirst;
     public Condition stamina;
 
     public float noHungerHealthDecay;
+    public float noThirstHealthDecay;
 
     public UnityEvent onTakeDamage;
+
+    [SerializeField] private TextMeshProUGUI temperature;
+
     // Start is called before the first frame update
     void Start()
     {
         health.curValue = health.startValue;
         hunger.curValue = hunger.startValue;
+        thirst.curValue = thirst.startValue;
         stamina.curValue = stamina.startValue;
     }
 
@@ -57,16 +64,25 @@ public class PlayerConditions : MonoBehaviour, IDamagable
     void Update()
     {
         hunger.Subtract(hunger.decayRate * Time.deltaTime);
+        thirst.Subtract(thirst.decayRate * Time.deltaTime * 0.4f);
         stamina.Add(stamina.regenRate * Time.deltaTime);
 
         if (hunger.curValue == 0.0f)
             health.Subtract(noHungerHealthDecay * Time.deltaTime);
+        if (thirst.curValue == 0.0f)
+            health.Subtract(noThirstHealthDecay * Time.deltaTime);
+
+        if(int.Parse(temperature.text) <= 10 || int.Parse(temperature.text) > 25)
+        {
+            health.Subtract(noThirstHealthDecay * Time.deltaTime);
+        }
 
         if (health.curValue == 0.0f)
             Die();
 
         health.uiBar.fillAmount = health.GetPercentage();
         hunger.uiBar.fillAmount = hunger.GetPercentage();
+        thirst.uiBar.fillAmount = thirst.GetPercentage();
         stamina.uiBar.fillAmount = stamina.GetPercentage();
     }
     public void Heal(float amount)
@@ -76,6 +92,11 @@ public class PlayerConditions : MonoBehaviour, IDamagable
     public void Eat(float amount)
     {
         hunger.Add(amount);
+    }
+
+    public void Drink(float amount)
+    {
+        thirst.Add(amount);
     }
 
     public bool UseStamina(float amount)
@@ -88,12 +109,13 @@ public class PlayerConditions : MonoBehaviour, IDamagable
 
     public void Die()
     {
-        Debug.Log("ÇÃ·¹ÀÌ¾î°¡ Á×¾ú´Ù.");
+        Debug.Log("ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½×¾ï¿½ï¿½ï¿½.");
     }
 
     public void TakePhysicalDamage(int damageAmount)
     {
         health.Subtract(damageAmount);
         onTakeDamage?.Invoke();
+
     }
 }

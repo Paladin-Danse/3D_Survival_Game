@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour
 {
+    public static DayNightCycle _instance;
+    private void Awake()
+    {
+        if (_instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        _instance = this;
+
+    }
+
     [Range(0.0f, 1.0f)]
     public float time;
     public float fullDayLength;
