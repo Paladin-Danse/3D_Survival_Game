@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbebeee4fc7c3ee4f8c6bfc9b021b06b, type: 3}
-  m_Name: CraftTable
+  m_Name: Kit_Table
   m_EditorClassIdentifier: 
-  displayName: "\uC81C\uC791\uB300"
-  description: "\uC218\uACF5\uC6A9 \uC791\uC5C5\uB300\uC785\uB2C8\uB2E4."
+  displayName: "\uC791\uC5C5\uB300"
+  description: "\uB2E4\uC6A9\uB3C4 \uC791\uC5C5\uB300\uC785\uB2C8\uB2E4"
   type: 0

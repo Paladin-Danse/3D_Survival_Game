@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f092584c9ddce0d46894d560f6e3996b, type: 3}
   m_Name: PickAxe
   m_EditorClassIdentifier: 
-  displayName: 
-  description: 
-  type: 0
+  displayName: "\uACE1\uAD2D\uC774"
+  description: "\uAD11\uBB3C\uCC44\uC9D1\uC5D0 \uC0AC\uC6A9\uD558\uB294 \uACE1\uAD2D\uC774"
+  type: 1
   icon: {fileID: 0}
   dropPrefab: {fileID: 0}
   canStack: 0
