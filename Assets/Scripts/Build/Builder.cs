@@ -28,30 +28,41 @@ public class Builder : MonoBehaviour
     [SerializeField] private float range;    
 
     BuildBtn buildBtn;
-    PlayerController controller;
-    Inventory inven;
+    PlayerController controller;    
 
     public bool isPreviewActivated = false;
+    int buildIndex;
 
     private void Awake()
     {
         buildBtn = GetComponent<BuildBtn>();
-        controller = FindObjectOfType<PlayerController>();
-        inven = Inventory.instance;
+        controller = FindObjectOfType<PlayerController>();        
     }    
 
     public void SlotClick(int _slotNum)
-    {
-        go_Preview = Instantiate(craft_Building[_slotNum].Bdata.preview_Prefab, Player_pos.position + Player_pos.forward, Quaternion.identity);
-        go_Prefab = craft_Building[_slotNum].Bdata.build_Prefab;
-        isPreviewActivated = true;
-        controller.ToggleCursor(false);
-        buildBtn.CraftPanel.SetActive(false);
-
-        //if (craft_Building[0].Bdata.ingredientItem[0].ingreItem.displayName == inven.slots[0].item.displayName)
-        //{
-
-        //}
+    {        
+        for(int i = 0;  i < craft_Building[_slotNum].Bdata.ingredientItem.Count; i++)
+        {
+            for(int j = 0; j < Inventory.instance.slots.Length; j++)
+            {                
+                if (Inventory.instance.slots[j].item != null && craft_Building[_slotNum].Bdata.ingredientItem[i].ingreItem.displayName == Inventory.instance.slots[j].item.displayName)
+                {
+                    if(Inventory.instance.slots[j].quantity >= craft_Building[_slotNum].Bdata.ingredientItem[i].ingreItemCount)
+                    {
+                        go_Preview = Instantiate(craft_Building[_slotNum].Bdata.preview_Prefab, Player_pos.position + Player_pos.forward, Quaternion.identity);
+                        go_Prefab = craft_Building[_slotNum].Bdata.build_Prefab;
+                        isPreviewActivated = true;
+                        controller.ToggleCursor(false);
+                        buildBtn.CraftPanel.SetActive(false);
+                    }
+                    else if (Inventory.instance.slots[j].quantity < craft_Building[_slotNum].Bdata.ingredientItem[i].ingreItemCount)
+                    {
+                        //재료가 부족합니다 판넬                        
+                    }
+                }
+            }
+        }
+        buildIndex = craft_Building[_slotNum].Bdata.buildingNumber;
     }
         
     void Update()
@@ -77,7 +88,7 @@ public class Builder : MonoBehaviour
     }
 
     public void Build()
-    {        
+    {
         if (isPreviewActivated && go_Preview.GetComponent<PreviewObject>().IsBuildable())
         {
             Instantiate(go_Prefab, go_Preview.transform.position, go_Preview.transform.rotation);
@@ -85,6 +96,30 @@ public class Builder : MonoBehaviour
             isPreviewActivated = false;
             go_Preview = null;
             go_Prefab = null;
+
+            for (int i = 0; i < craft_Building[buildIndex].Bdata.ingredientItem.Count; i++)
+            {
+                for (int j = 0; j < Inventory.instance.slots.Length; j++)
+                {
+                    if(Inventory.instance.slots[j].item != null && craft_Building[buildIndex].Bdata.ingredientItem[i].ingreItem.displayName == Inventory.instance.slots[j].item.displayName)
+                    {
+                        Inventory.instance.slots[j].quantity -= craft_Building[buildIndex].Bdata.ingredientItem[i].ingreItemCount;
+                        if (Inventory.instance.slots[j].quantity <= 0)
+                        {
+                            if (Inventory.instance.uiSlots[j].equipped)
+                            {
+                                Inventory.instance.UnEquip(j);
+                            }
+
+                            Inventory.instance.slots[j].item = null;                            
+                        }
+                    }                    
+                    
+                }
+            }
+
+            Inventory.instance.UpdateUI();
+            
         }
-    }    
+    }        
 }

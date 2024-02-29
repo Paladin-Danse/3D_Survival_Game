@@ -126,7 +126,7 @@ public class Inventory : MonoBehaviour
         Instantiate(item.dropPrefab, dropPosition.position, Quaternion.Euler(Vector3.one * Random.value * 360f));
     }
 
-    void UpdateUI()
+    public void UpdateUI()
     {
         for(int i = 0; i < slots.Length; i++)
         {
@@ -182,7 +182,7 @@ public class Inventory : MonoBehaviour
         dropButton.SetActive(true);
     }
 
-    private void ClearSelectItemWindow()
+    void ClearSelectItemWindow()
     {
         selectedItem = null;
         selectedItemName.text = string.Empty;
@@ -231,7 +231,7 @@ public class Inventory : MonoBehaviour
 
         SelectItem(selectedItemIndex);
     }
-    void UnEquip(int index)
+    public void UnEquip(int index)
     {
         uiSlots[index].equipped = false;
         EquipManager.instance.UnEquip();
