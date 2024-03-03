@@ -47,7 +47,6 @@ public class AnimalAttackState : AnimalBaseState
             else
             {
                 stateMachine.ChangeState(stateMachine.fleeState);
-                //SetState(AIState.Fleeing);
             }
         }
         else
