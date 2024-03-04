@@ -5,8 +5,8 @@ using UnityEngine;
 public class BuildList : MonoBehaviour
 {
     [Header("Construction Building")]
-    [SerializeField] private Transform content;
-    [SerializeField] private GameObject buildingPanel;
+    [SerializeField] private Transform content;    
+    [SerializeField] private GameObject buildingPanel;    
 
     Builder builder;
     private void Awake()
@@ -20,11 +20,13 @@ public class BuildList : MonoBehaviour
 
     void ConstructionList()
     {
-        foreach(Building building in builder.craft_Building)
+        for(int i = 0; i < builder.craft_Building.Length; i++)
         {
             ConstructionBuilding constructionBuilding = Instantiate(buildingPanel, content).GetComponent<ConstructionBuilding>();
-            constructionBuilding.InitBuilding(building);
+            constructionBuilding.InitBuilding(builder.craft_Building[i]);
+            constructionBuilding.GetComponent<NeedIngredientList>().buildIndex = i;            
         }
+        
     }
 
 }
