@@ -23,6 +23,7 @@ public class BuildList : MonoBehaviour
         for(int i = 0; i < builder.craft_Building.Length; i++)
         {
             ConstructionBuilding constructionBuilding = Instantiate(buildingPanel, content).GetComponent<ConstructionBuilding>();
+            constructionBuilding.gameObject.name = "BuildingPanel" + i.ToString();
             constructionBuilding.InitBuilding(builder.craft_Building[i]);
             constructionBuilding.GetComponent<NeedIngredientList>().buildIndex = i;            
         }

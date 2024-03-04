@@ -10,17 +10,19 @@ public class ConstructionBuilding : MonoBehaviour
     [SerializeField] private TextMeshProUGUI buildingExTxt;
     [SerializeField] private Image buildingImageUI;
     [SerializeField] private Button buildButton;
-    [SerializeField] private GameObject needIngredientPanel;
+    [SerializeField] public GameObject needIngredientPanel;
     [SerializeField] private Button needIngredient;    
 
     bool isPanelActive = false;
 
     Building building;
     Builder builder;
+    
     private void Awake()
     {
-        builder = FindObjectOfType<Builder>();
+        builder = FindObjectOfType<Builder>();        
     }
+    
     public void InitBuilding(Building building)
     {
         this.building = building;
