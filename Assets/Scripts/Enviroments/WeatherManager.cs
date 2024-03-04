@@ -6,6 +6,9 @@ public enum Weather { SUNNY, RAIN }
 
 public class WeatherManager : MonoBehaviour
 {
+    public AudioClip rainsound;
+    public AudioSource audioSource;
+
     static public WeatherManager instance;
 
     private void Awake()
@@ -50,6 +53,7 @@ public class WeatherManager : MonoBehaviour
                     currentWeather = Weather.RAIN;
                     this.rain.Play();
                     this.lightning.Play();
+                    audioSource.PlayOneShot(rainsound);
                     break;
             }
         }
