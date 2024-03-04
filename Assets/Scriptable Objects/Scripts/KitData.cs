@@ -18,4 +18,5 @@ public class KitData : ScriptableObject
     public string displayName;
     public string description;
     public KitType type;
+
 }

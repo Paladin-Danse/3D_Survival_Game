@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5241323543571534292}
   - component: {fileID: 1339481113821927440}
   - component: {fileID: 8895999948215709062}
+  - component: {fileID: 615771630104335979}
   m_Layer: 7
   m_Name: kit_Table
   m_TagString: Untagged
@@ -26,13 +27,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1048602169264221456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.1, y: 0.142, z: -10.48}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8824341787372711011}
+  - {fileID: 1602401454014994358}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1339481113821927440
 BoxCollider:
@@ -53,8 +55,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.9993954, y: 1.0267118, z: 2}
-  m_Center: {x: -0.00030231476, y: 0.5060994, z: 0}
+  m_Size: {x: 0.9993954, y: 1.0267118, z: 2.3826256}
+  m_Center: {x: -0.00030231476, y: 0.5060994, z: 0.04809022}
 --- !u!114 &8895999948215709062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +70,69 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kit: {fileID: 11400000, guid: 45a5ecd556f91304bb8aea57a7e02ae0, type: 2}
-  ItemCraft: {fileID: 0}
+  ItemCraft: {fileID: 615771630104335979}
+--- !u!114 &615771630104335979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048602169264221456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1da51b936eca717428807d3e337af26b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kitData: {fileID: 0}
+  _Inventory: {fileID: 0}
+  craftWindow: {fileID: 1182128010428621562, guid: 4fde10e70bab3fe4e8b5208a7387b8c5, type: 3}
+  createPosition: {fileID: 1602401454014994358}
+  itemName: 
+  itemImage: {fileID: 0}
+  itemDescription: 
+  kitName: {fileID: 0}
+  kitDescription: {fileID: 0}
+  craftNeedItem: {fileID: 0}
+  craftNeedItemCount: {fileID: 0}
+  craftBtn: {fileID: 0}
+  closeBtn: {fileID: 0}
+  onOpenCraft:
+    m_PersistentCalls:
+      m_Calls: []
+  onCloseCraft:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &7887140441616379333
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1602401454014994358}
+  m_Layer: 7
+  m_Name: CreatePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1602401454014994358
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7887140441616379333}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.075, y: 1.406, z: -0.566}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5241323543571534292}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8824341787372582627
 PrefabInstance:
   m_ObjectHideFlags: 0

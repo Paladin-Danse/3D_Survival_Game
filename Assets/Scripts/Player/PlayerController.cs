@@ -56,11 +56,14 @@ public class PlayerController : MonoBehaviour
     }
     private void Move()
     {
-        Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-        dir *= moveSpeed;
-        dir.y = _rigidbody.velocity.y;
+        if (canMove)
+        {
+            Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
+            dir *= moveSpeed;
+            dir.y = _rigidbody.velocity.y;
 
-        _rigidbody.velocity = dir;
+            _rigidbody.velocity = dir;
+        }
     }
     void CameraLook()
     {
@@ -89,10 +92,13 @@ public class PlayerController : MonoBehaviour
     }
     public void OnJumpInput(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Started)
+        if (canJump)
         {
-            if(IsGrounded())
-                _rigidbody.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
+            if (context.phase == InputActionPhase.Started)
+            {
+                if (IsGrounded())
+                    _rigidbody.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
+            }
         }
     }
     private bool IsGrounded()
@@ -127,6 +133,8 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
+        canMove = !toggle;
+        canJump = !toggle;
     }
 
 }

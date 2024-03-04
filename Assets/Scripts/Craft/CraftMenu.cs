@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,56 +11,66 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class CraftSlot
 {
-    public ItemData item;
+    public KitData kit;
+    public CraftData craftData;
+    public ItemData itemData;
 }
 
 public class CraftMenu : MonoBehaviour
 {
-
-    
+    public CraftSlot[] cSlots;
+    public CraftData craftData;
     public KitData kitData;
     public Inventory _Inventory;
-    public GameObject craftWindow; // 제조메뉴
-    [SerializeField] public Transform createPosition; //아이템 생성 위치
+    public GameObject craftWindow;
+    public Transform craftPostioin;
+
 
     [Header("Selected Craft")]
-    public string itemName;
-    public Sprite itemImage;
-    public string itemDescription;
+    private CraftSlot selectedCraft;
+    private int selectedCraftIndex;
     public TextMeshProUGUI kitName;
     public TextMeshProUGUI kitDescription;
+    public TextMeshProUGUI selectedItemName;
+    public TextMeshProUGUI selectedItemDescription;
     public TextMeshProUGUI craftNeedItem;
     public TextMeshProUGUI craftNeedItemCount;
 
     public GameObject craftBtn;
-    public GameObject closeBtn;
-    
+    public GameObject craftPrefab;
+
     PlayerController controller;
 
     [Header("Events")]
     public UnityEvent onOpenCraft;
     public UnityEvent onCloseCraft;
 
-    void Awake()
+
+    public static CraftMenu instance;
+    
+    private void Awake()
     {
+        instance = this;
         controller = FindObjectOfType<PlayerController>();
     }
 
 
     private void Start()
     {
-        craftWindow.SetActive(false);
+       
+        cSlots = new CraftSlot[3];
+
+        for (int i = 0; i < cSlots.Length; i++)
+        {
+            cSlots[i] = new CraftSlot();
+        }
+        ClearSelectCraftWindow();
     }
 
     public void OnCraftWindow()
     {
-            bool isOpen = craftWindow.activeSelf;
-            craftWindow.SetActive(!isOpen);              
-    }
 
 
-    public void Toggle()
-    {
         if (craftWindow.activeInHierarchy)
         {
             craftWindow.SetActive(false);
@@ -73,5 +84,42 @@ public class CraftMenu : MonoBehaviour
             onOpenCraft?.Invoke();
             controller.ToggleCursor(true);
         }
+    }
+
+    public bool IsOpen()
+    {
+        return craftWindow.activeInHierarchy;
+    }
+
+    public void SelectCraft(int index)
+    {
+        
+    }
+
+    public void OnCraftBtn()
+    {
+        CraftItem(selectedCraft.itemData);
+
+    }
+
+    private void CraftItem(ItemData item )
+    {
+        Instantiate(item.dropPrefab, craftPostioin);
+        RemoveNeedItem();
+    }
+
+    private void RemoveNeedItem()
+    {
+ 
+        
+    }
+
+    void ClearSelectCraftWindow()
+    {
+        selectedCraft = null;
+        selectedItemName.text = string.Empty;
+        selectedItemDescription.text = string.Empty;
+
+        craftBtn.SetActive(false);
     }
 }
