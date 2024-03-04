@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ece41e17ec3cdf841b0103411aa9f6bb, type: 3}
+  m_Name: WoodenHouse2
+  m_EditorClassIdentifier: 
+  BuildingName: "2\uCE35 \uB098\uBB34 \uC9D1"
+  description: "\uBCF5\uCE35 \uD615\uC2DD\uC758 \uB098\uBB34 \uC9D1"
+  icon: {fileID: 21300000, guid: dcfb32d4033a7e146af4d9794a34a867, type: 3}
+  build_Prefab: {fileID: 5242299454206825381, guid: 939784351bca95a48b15f5e4f05849c7, type: 3}
+  preview_Prefab: {fileID: 7869384990515395146, guid: 7fac81f195c98f247a571db49282860d, type: 3}
+  buildingNumber: 2
+  ingredientItem:
+  - ingreItem: {fileID: 11400000, guid: c2ab6602065c4e14485fc0966b1141e9, type: 2}
+    ingreItemCount: 10

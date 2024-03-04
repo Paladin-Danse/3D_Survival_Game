@@ -10,14 +10,23 @@ public class AnimalIdleState : AnimalBaseState
 
     public override void Enter()
     {
-        stateMachine.animal.SetAgentMoveSpeed(stateMachine.animal.data.walkSpeed, true);
+        Animal animal = stateMachine.animal;
+
+        animal.SetAgentMoveSpeed(stateMachine.animal.data.walkSpeed, true);
+        if (stateMachine.AnimationCoroutine != null)
+        {
+            animal.StopCoroutine(stateMachine.AnimationCoroutine);
+            stateMachine.AnimationCoroutine = null;
+        }
+        stateMachine.AnimationCoroutine = animal.WanderToNewLocation();
+        animal.StartCoroutine(stateMachine.AnimationCoroutine);
         base.Enter();
         StartAnimation(stateMachine.animal.animationData.IdleParameterHash);
     }
     public override void Update()
     {
         base.Update();
-        PassiveUpdate();
+        PlayerSearch();
     }
 
     public override void Exit()

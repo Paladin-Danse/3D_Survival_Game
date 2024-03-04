@@ -13,12 +13,18 @@ public class AnimalFleeState : AnimalBaseState
     {
         stateMachine.animal.SetAgentMoveSpeed(stateMachine.animal.data.runSpeed, false);
         base.Enter();
-
+        StartAnimation(stateMachine.animal.animationData.RunParameterHash);
     }
     public override void Update()
     {
         base.Update();
         FleeingUpdate();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        StopAnimation(stateMachine.animal.animationData.RunParameterHash);
     }
     public void FleeingUpdate()
     {

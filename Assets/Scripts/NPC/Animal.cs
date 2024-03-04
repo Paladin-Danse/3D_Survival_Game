@@ -28,6 +28,7 @@ public class Animal : MonoBehaviour, IDamagable
     private AnimalStateMachine stateMachine;
     public NavMeshAgent agent;
     private SkinnedMeshRenderer[] meshRenderers;
+    private PlayerController playerController;
 
     protected AIState aiState;
     public float lastAttackTime { get; set; }
@@ -45,11 +46,25 @@ public class Animal : MonoBehaviour, IDamagable
         meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
 
         stateMachine = new AnimalStateMachine(this);
+        
+    }
+
+    private void OnEnable()
+    {
+        agent.enabled = true;
+        stateMachine.ChangeState(stateMachine.idleState);
+        health = data.maxHealth;
     }
 
     private void Start()
     {
-        playerPos = PlayerController.instance ? PlayerController.instance.transform.position : new Vector3(0, 0, 0);
+        if (PlayerController.instance)
+            playerController = PlayerController.instance;
+        else if (GameObject.FindObjectOfType<PlayerController>())
+            playerController = GameObject.FindObjectOfType<PlayerController>();
+        else
+            Debug.Log("Animal : PlayerController is Not Found!");
+
         stateMachine.ChangeState(stateMachine.idleState);
         health = data.maxHealth;
 
@@ -58,70 +73,16 @@ public class Animal : MonoBehaviour, IDamagable
 
     private void Update()
     {
+        playerPos = playerController ? playerController.transform.position : new Vector3(0, 0, 0);
+
         playerDistance = Vector3.Distance(transform.position, playerPos);
 
-        //stateMachine.HandleInput();
-        stateMachine.Update();
-    }
-    /*
-    protected void SetState(AIState newState)
-    {
-        aiState = newState;
-        switch (aiState)
+        if (!IsDead)
         {
-            case AIState.Idle:
-                {
-                    agent.speed = data.walkSpeed;
-                    agent.isStopped = true;
-                }
-                break;
-            case AIState.Wandering:
-                {
-                    agent.speed = data.walkSpeed;
-                    agent.isStopped = false;
-                }
-                break;
-
-            case AIState.Attacking:
-                {
-                    agent.speed = data.runSpeed;
-                    agent.isStopped = false;
-                }
-                break;
-            case AIState.RunAway:
-                {
-                    agent.speed = data.runSpeed;
-                    agent.isStopped = false;
-                }
-                break;
-            case AIState.Fleeing:
-                {
-                    agent.speed = data.runSpeed;
-                    agent.isStopped = false;
-                }
-                break;
+            //stateMachine.HandleInput();
+            stateMachine.Update();
         }
-
-        animator.speed = agent.speed / data.walkSpeed;
     }
-    *///SetState();
-    
-
-    //public void PassiveUpdate()
-    //{
-    //    if (agent.remainingDistance < 0.1f)
-    //    {
-    //        stateMachine.ChangeState(stateMachine.idleState);
-    //        //SetState(AIState.Idle);
-    //        Invoke("WanderToNewLocation", Random.Range(data.minWanderWaitTime, data.maxWanderWaitTime));
-    //    }
-
-    //    if (playerDistance < data.detectDistance)
-    //    {
-    //        stateMachine.ChangeState(stateMachine.attackState);
-    //        //SetState(AIState.Attacking);
-    //    }
-    //}
 
     Vector3 GetWanderLocation()
     {
@@ -137,7 +98,7 @@ public class Animal : MonoBehaviour, IDamagable
             if (i == 30)
                 break;
         }
-
+        
         return hit.position;
     }
 
@@ -147,18 +108,29 @@ public class Animal : MonoBehaviour, IDamagable
         health = Mathf.Max(health -= damageAmount, 0);
 
         if (health == 0) OnDie?.Invoke();
-        
+        else animator.SetTrigger("OnHit");
+
         StartCoroutine(DamageFlash());
     }
 
     void Die()
     {
+        if (!IsDead) return;
+
+        agent.isStopped = true;
+        agent.enabled = false;
+
         for (int x = 0; x < data.dropOnDeath.Length; x++)
         {
             Instantiate(data.dropOnDeath[x].dropPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
         }
 
-        gameObject.SetActive(false);
+        if (stateMachine.AnimationCoroutine != DeathAnimation())
+        {
+            StopCoroutine(stateMachine.AnimationCoroutine);
+            stateMachine.AnimationCoroutine = DeathAnimation();
+            StartCoroutine(stateMachine.AnimationCoroutine);
+        }
     }
 
     public void SetAgentMoveSpeed(float newSpeed, bool isStop)
@@ -186,6 +158,8 @@ public class Animal : MonoBehaviour, IDamagable
 
     IEnumerator DeathAnimation()
     {
+        animator.SetTrigger("Death");
+
         //죽는 애니메이션이 올때까지 기다리고
         while (!animator.GetCurrentAnimatorStateInfo(0).IsTag("Death"))
         {

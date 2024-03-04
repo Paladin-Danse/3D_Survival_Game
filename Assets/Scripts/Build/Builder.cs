@@ -11,7 +11,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 [System.Serializable]
 public class Building
-{
+{     
     public BuildingData Bdata;
 }
 public class Builder : MonoBehaviour

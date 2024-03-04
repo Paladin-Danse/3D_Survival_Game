@@ -9,28 +9,36 @@ using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class BuildBtn : MonoBehaviour
 {
-    [SerializeField] public GameObject CraftPanel; // °Ç¹° Áþ±â UI
+    [SerializeField] public GameObject CraftPanel; // °Ç¹° Áþ±â UI    
 
     public Vector3 Brotation = new Vector3(0f, 0f, 0f);
 
     private PlayerController controller;
-    private Builder _builder;
+    private Builder _builder;    
 
     [Header("Events")]
     public UnityEvent onOpenCraftPanel;
     public UnityEvent onCloseCraftPanel;
     public UnityEvent onCancel;
 
+    public GameObject content_Ob;
+
     void Awake()
     {        
         controller = FindObjectOfType<PlayerController>();     
-        _builder = GetComponent<Builder>();
+        _builder = GetComponent<Builder>();                         
     }
+    
     public void OnCraftPanelButton(InputAction.CallbackContext callbackContext)
     {
         if (callbackContext.phase == InputActionPhase.Started && !_builder.isPreviewActivated)
         {
             Toggle();
+            for (int i = 0; i < content_Ob.transform.childCount; i++)
+            {                
+                content_Ob.transform.GetChild(i).gameObject.GetComponent<ConstructionBuilding>().needIngredientPanel.SetActive(false);
+            }
+            
         }
     }
 
@@ -56,13 +64,13 @@ public class BuildBtn : MonoBehaviour
         {
             CraftPanel.SetActive(false);
             onCloseCraftPanel?.Invoke();
-            controller.ToggleCursor(false);
+            controller.ToggleCursor(false);            
         }
         else
         {
             CraftPanel.SetActive(true);
             onOpenCraftPanel?.Invoke();
-            controller.ToggleCursor(true);
+            controller.ToggleCursor(true);            
         }
     }
 

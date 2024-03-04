@@ -24,4 +24,13 @@ public class AnimalWanderState : AnimalBaseState
         base.Exit();
         StopAnimation(stateMachine.animal.animationData.WalkParameterHash);
     }
+
+    public void PassiveUpdate()
+    {
+        if (stateMachine.animal.agent.remainingDistance < 0.1f)
+        {
+            stateMachine.ChangeState(stateMachine.idleState);
+        }
+        PlayerSearch();
+    }
 }

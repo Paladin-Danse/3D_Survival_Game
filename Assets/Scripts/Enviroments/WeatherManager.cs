@@ -27,7 +27,6 @@ public class WeatherManager : MonoBehaviour
     public int next_weather;
 
     public ParticleSystem lightning;
-    public bool playlightning = true;
 
     void Start()
     {

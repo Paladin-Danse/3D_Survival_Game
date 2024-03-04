@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefebs/Craft.meta
 guid: 68031c7b7a33add40afd83672754357d
 folderAsset: yes
+========
+guid: 2cda990e2423bbf4892e6590ba056729
+>>>>>>>> Dev:Assets/Assets/BuildAssets/Buttons/Scenes/SampleScene.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
