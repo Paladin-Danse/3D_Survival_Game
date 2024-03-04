@@ -46,7 +46,7 @@ public class Animal : MonoBehaviour, IDamagable
         meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
 
         stateMachine = new AnimalStateMachine(this);
-        playerController = PlayerController.instance;
+        
     }
 
     private void OnEnable()
@@ -58,6 +58,13 @@ public class Animal : MonoBehaviour, IDamagable
 
     private void Start()
     {
+        if (PlayerController.instance)
+            playerController = PlayerController.instance;
+        else if (GameObject.FindObjectOfType<PlayerController>())
+            playerController = GameObject.FindObjectOfType<PlayerController>();
+        else
+            Debug.Log("Animal : PlayerController is Not Found!");
+
         stateMachine.ChangeState(stateMachine.idleState);
         health = data.maxHealth;
 
