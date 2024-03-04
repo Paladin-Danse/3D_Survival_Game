@@ -28,6 +28,7 @@ public class Animal : MonoBehaviour, IDamagable
     private AnimalStateMachine stateMachine;
     public NavMeshAgent agent;
     private SkinnedMeshRenderer[] meshRenderers;
+    private PlayerController playerController;
 
     protected AIState aiState;
     public float lastAttackTime { get; set; }
@@ -45,11 +46,18 @@ public class Animal : MonoBehaviour, IDamagable
         meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
 
         stateMachine = new AnimalStateMachine(this);
+        playerController = PlayerController.instance;
+    }
+
+    private void OnEnable()
+    {
+        agent.enabled = true;
+        stateMachine.ChangeState(stateMachine.idleState);
+        health = data.maxHealth;
     }
 
     private void Start()
     {
-        playerPos = PlayerController.instance ? PlayerController.instance.transform.position : new Vector3(0, 0, 0);
         stateMachine.ChangeState(stateMachine.idleState);
         health = data.maxHealth;
 
@@ -58,10 +66,15 @@ public class Animal : MonoBehaviour, IDamagable
 
     private void Update()
     {
+        playerPos = playerController ? playerController.transform.position : new Vector3(0, 0, 0);
+
         playerDistance = Vector3.Distance(transform.position, playerPos);
 
-        //stateMachine.HandleInput();
-        stateMachine.Update();
+        if (!IsDead)
+        {
+            //stateMachine.HandleInput();
+            stateMachine.Update();
+        }
     }
     /*
     protected void SetState(AIState newState)
@@ -137,7 +150,7 @@ public class Animal : MonoBehaviour, IDamagable
             if (i == 30)
                 break;
         }
-
+        
         return hit.position;
     }
 
@@ -147,18 +160,29 @@ public class Animal : MonoBehaviour, IDamagable
         health = Mathf.Max(health -= damageAmount, 0);
 
         if (health == 0) OnDie?.Invoke();
-        
+        else animator.SetTrigger("OnHit");
+
         StartCoroutine(DamageFlash());
     }
 
     void Die()
     {
+        if (!IsDead) return;
+
+        agent.isStopped = true;
+        agent.enabled = false;
+
         for (int x = 0; x < data.dropOnDeath.Length; x++)
         {
             Instantiate(data.dropOnDeath[x].dropPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
         }
 
-        gameObject.SetActive(false);
+        if (stateMachine.AnimationCoroutine != DeathAnimation())
+        {
+            StopCoroutine(stateMachine.AnimationCoroutine);
+            stateMachine.AnimationCoroutine = DeathAnimation();
+            StartCoroutine(stateMachine.AnimationCoroutine);
+        }
     }
 
     public void SetAgentMoveSpeed(float newSpeed, bool isStop)
@@ -186,6 +210,8 @@ public class Animal : MonoBehaviour, IDamagable
 
     IEnumerator DeathAnimation()
     {
+        animator.SetTrigger("Death");
+
         //죽는 애니메이션이 올때까지 기다리고
         while (!animator.GetCurrentAnimatorStateInfo(0).IsTag("Death"))
         {
