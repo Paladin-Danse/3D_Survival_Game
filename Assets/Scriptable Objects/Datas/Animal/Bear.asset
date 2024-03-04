@@ -16,7 +16,7 @@ MonoBehaviour:
   name: Bear
   maxHealth: 6
   walkSpeed: 1
-  runSpeed: 4
+  runSpeed: 8
   dropOnDeath:
   - {fileID: 11400000, guid: 1b8110232980d6e469ed5a93781e00c2, type: 2}
   isHostile: 1

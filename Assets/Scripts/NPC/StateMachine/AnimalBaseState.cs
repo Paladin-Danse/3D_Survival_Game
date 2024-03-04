@@ -48,34 +48,6 @@ public class AnimalBaseState : IState
         stateMachine.animal.animator.SetBool(animationHash, false);
     }
 
-    public void PassiveUpdate()
-    {
-        if (stateMachine.animal.agent.remainingDistance < 0.1f)
-        {
-            stateMachine.ChangeState(stateMachine.idleState);
-            if (stateMachine.AnimationCoroutine == null)
-            {
-                stateMachine.AnimationCoroutine = stateMachine.animal.WanderToNewLocation();
-                stateMachine.animal.StartCoroutine(stateMachine.AnimationCoroutine);
-            }
-        }
-        
-        if (stateMachine.animal.playerDistance < stateMachine.animal.data.detectDistance)
-        {
-            if (stateMachine.animal.data.isHostile)
-            {
-                stateMachine.animal.animator.SetTrigger(stateMachine.animal.animationData.AlertParameterHash);
-
-                if (stateMachine.AnimationCoroutine == null || stateMachine.AnimationCoroutine != BarkAnimation())
-                {
-                    if(stateMachine.AnimationCoroutine != null) stateMachine.animal.StopCoroutine(stateMachine.AnimationCoroutine);
-                    stateMachine.AnimationCoroutine = BarkAnimation();
-                    stateMachine.animal.StartCoroutine(stateMachine.AnimationCoroutine);
-                }
-            }
-        }
-    }
-
     public IEnumerator BarkAnimation()
     {
         stateMachine.animal.agent.isStopped = true;
@@ -89,6 +61,26 @@ public class AnimalBaseState : IState
         stateMachine.animal.agent.isStopped = false;
         stateMachine.ChangeState(stateMachine.attackState);
     }
+
+    public void PlayerSearch()
+    {
+        if (stateMachine.animal.playerDistance < stateMachine.animal.data.detectDistance)
+        {
+            if (stateMachine.animal.data.isHostile)
+            {
+                stateMachine.animal.animator.SetTrigger(stateMachine.animal.animationData.AlertParameterHash);
+
+                if (stateMachine.AnimationCoroutine == null || stateMachine.AnimationCoroutine != BarkAnimation())
+                {
+                    if (stateMachine.AnimationCoroutine != null) stateMachine.animal.StopCoroutine(stateMachine.AnimationCoroutine);
+                    stateMachine.AnimationCoroutine = BarkAnimation();
+                    stateMachine.animal.StartCoroutine(stateMachine.AnimationCoroutine);
+                }
+            }
+        }
+    }
+    
+
     //protected float GetNormalizedTime(Animator animator, string tag)
     //{
     //    AnimatorStateInfo currentInfo = animator.GetCurrentAnimatorStateInfo(0);

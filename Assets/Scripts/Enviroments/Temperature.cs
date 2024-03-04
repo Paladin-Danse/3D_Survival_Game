@@ -85,38 +85,38 @@ public class Temperature : MonoBehaviour
         float sunTime = sunIntensity.Evaluate(time);
         float moonTime = moonIntensity.Evaluate(time);
 
-        //Weather weatherValue = WeatherManager.instance.currentWeather;
+        Weather weatherValue = WeatherManager.instance.currentWeather;
 
-        if(moonTime == 0)
+        if (moonTime == 0)
         {
             temperature = (1 + sunTime) * 15f;
 
-            //if(weatherValue == Weather.RAIN)
-            //{
-            //    temperature = (1 + sunTime) * 15f - 10f;
-            //}
+            if (weatherValue == Weather.RAIN)
+            {
+                temperature = (1 + sunTime) * 15f - 10f;
+            }
         }
-            
-        if(sunTime == 0)
+
+        if (sunTime == 0)
         {
             temperature = (1 - moonTime) * 15f;
 
-            //if(weatherValue == Weather.RAIN)
-            //{
-            //    temperature = (1 + sunTime) * 15f - 10f;
-            //}
+            if (weatherValue == Weather.RAIN)
+            {
+                temperature = (1 - moonTime) * 15f - 10f;
+            }
         }
-        
-        //if (weatherValue == Weather.RAIN)
-        //{
-        //    weatherRain.SetActive(true);
-        //    weatherSun.SetActive(false);
-        //}
-        //else
-        //{
-        //    weatherRain.SetActive(false);
-        //    weatherSun.SetActive(true);
-        //}
+
+        if (weatherValue == Weather.RAIN)
+        {
+            weatherRain.SetActive(true);
+            weatherSun.SetActive(false);
+        }
+        else
+        {
+            weatherRain.SetActive(false);
+            weatherSun.SetActive(true);
+        }
 
         return (int)temperature;
     }
