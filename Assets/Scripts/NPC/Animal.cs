@@ -127,7 +127,7 @@ public class Animal : MonoBehaviour, IDamagable
 
         if (stateMachine.AnimationCoroutine != DeathAnimation())
         {
-            StopCoroutine(stateMachine.AnimationCoroutine);
+            if(stateMachine.AnimationCoroutine != null) StopCoroutine(stateMachine.AnimationCoroutine);
             stateMachine.AnimationCoroutine = DeathAnimation();
             StartCoroutine(stateMachine.AnimationCoroutine);
         }
@@ -172,7 +172,10 @@ public class Animal : MonoBehaviour, IDamagable
         }
         //죽은 뒤 소멸시간까지 기다렸다가
         yield return new WaitForSeconds(data.deathToTime);
+        //새로운 동물을 스폰하도록 명령내리고
+        AnimalSpawner.Instance.AnimalRespawn();
         //게임에서 제거
         gameObject.SetActive(false);
+        
     }
 }
