@@ -35,7 +35,6 @@ public class WeatherManager : MonoBehaviour
     {
         currentWeather = Weather.SUNNY;
         next_weather = 1;
-
     }
 
     public void ChangeWeather(Weather weatherType)
@@ -48,12 +47,14 @@ public class WeatherManager : MonoBehaviour
                     currentWeather = Weather.SUNNY;
                     this.rain.Stop();
                     this.lightning.Stop();
+                    audioSource.Stop();
                     break;
                 case Weather.RAIN:
                     currentWeather = Weather.RAIN;
                     this.rain.Play();
                     this.lightning.Play();
-                    audioSource.PlayOneShot(rainsound);
+                    audioSource.clip = rainsound;
+                    audioSource.Play();
                     break;
             }
         }
