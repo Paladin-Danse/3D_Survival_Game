@@ -17,9 +17,6 @@ public class CraftKit : MonoBehaviour , IInteractable
 
     public void OnInteract()
     {
-        if (ItemCraft != null)
-        {
-            ItemCraft.OnCraftWindow();
-        }
+          ItemCraft.OnCraftWindow();
     }
 }

@@ -7,7 +7,8 @@ public enum ItemType
 {
     Resource,
     Equipable,
-    Consumable
+    Consumable,
+    menual
 }
 
 public enum ConsumableType
@@ -42,4 +43,7 @@ public class ItemData : ScriptableObject
     
     [Header("Equip")]
     public GameObject equipPrefab;
+
+    [Header("MenualRank")]
+    public int rankIndex;
 }

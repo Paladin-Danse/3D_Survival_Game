@@ -17,6 +17,7 @@ public class Inventory : MonoBehaviour
     public ItemSlotUI[] uiSlots;
     public ItemSlot[] slots;
 
+    public GameObject craftWindow;
     public GameObject inventoryWindow;
     public Transform dropPosition;
 
@@ -51,6 +52,7 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
+        craftWindow.SetActive(false);
         inventoryWindow.SetActive(false);
         slots = new ItemSlot[uiSlots.Length];
 
