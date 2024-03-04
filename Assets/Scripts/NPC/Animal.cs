@@ -175,7 +175,7 @@ public class Animal : MonoBehaviour, IDamagable
         //새로운 동물을 스폰하도록 명령내리고
         AnimalSpawner.Instance.AnimalRespawn();
         //게임에서 제거
-        gameObject.SetActive(false);
+        transform.parent.gameObject.SetActive(false);
         
     }
 }
