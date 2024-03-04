@@ -61,12 +61,5 @@ public class AnimalAttackState : AnimalBaseState
             }
         }
     }
-    bool IsPlaterInFireldOfView()
-    {
-        Animal animal = stateMachine.animal;
-
-        Vector3 directionToPlayer = animal.playerPos - animal.transform.position;
-        float angle = Vector3.Angle(animal.transform.forward, directionToPlayer);
-        return angle < animal.data.fieldOfView * 0.5f;
-    }
+    
 }
