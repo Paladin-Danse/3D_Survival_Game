@@ -1,14 +1,8 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scriptable Objects/Datas/menual_1.asset.meta
-guid: 17d13ead30cc688428a9fadf40bd73b4
-NativeFormatImporter:
-========
 guid: a39c42477bc20be498342a9b806ba8a7
 folderAsset: yes
 DefaultImporter:
->>>>>>>> Dev:Assets/Prefebs/Build/WoodenWell.meta
   externalObjects: {}
-  mainObjectFileID: 11400000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -1,14 +1,8 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scriptable Objects/Datas/Cristal.asset.meta
-guid: e22f15231ce883c41ba8524e02bd5230
-NativeFormatImporter:
-========
 guid: 9020439d7b418ac40b3605cd7bb4fcbe
 folderAsset: yes
 DefaultImporter:
->>>>>>>> Dev:Assets/Prefebs/Build/WoodenHouse2.meta
   externalObjects: {}
-  mainObjectFileID: 11400000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

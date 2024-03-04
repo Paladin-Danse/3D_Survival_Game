@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Assets/BuildAssets/Buttons.meta
 guid: b4e79df18c45d8d43ab754b2ac6b680c
+========
+guid: 907f64963d9a24f4093eacf79869aaa9
+>>>>>>>> Dev:Assets/Assets/BuildAssets.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
