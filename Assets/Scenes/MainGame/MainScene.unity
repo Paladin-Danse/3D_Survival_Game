@@ -2486,6 +2486,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 835598243}
     m_Modifications:
+    - target: {fileID: 655678282583830307, guid: 763d73dd2ccd2504bb1a96289df51485, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 655678282583830307, guid: 763d73dd2ccd2504bb1a96289df51485, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66421f70d1480a94cb70fdb1a0a924c3, type: 3}
     - target: {fileID: 930885244496618937, guid: 763d73dd2ccd2504bb1a96289df51485, type: 3}
       propertyPath: m_Name
       value: BuildCanvas
@@ -2494,6 +2502,22 @@ PrefabInstance:
       propertyPath: Player_pos
       value: 
       objectReference: {fileID: 1122411228}
+    - target: {fileID: 4386352020443230645, guid: 763d73dd2ccd2504bb1a96289df51485, type: 3}
+      propertyPath: craft_Building.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386352020443230645, guid: 763d73dd2ccd2504bb1a96289df51485, type: 3}
+      propertyPath: craft_Building.Array.data[2].Bdata
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e87afb6113923e4db14e3eda13e4ef8, type: 2}
+    - target: {fileID: 4386352020443230645, guid: 763d73dd2ccd2504bb1a96289df51485, type: 3}
+      propertyPath: craft_Building.Array.data[3].Bdata
+      value: 
+      objectReference: {fileID: 11400000, guid: 251d8d610c35c8f47a4835774b74eae4, type: 2}
+    - target: {fileID: 4386352020443230645, guid: 763d73dd2ccd2504bb1a96289df51485, type: 3}
+      propertyPath: craft_Building.Array.data[4].Bdata
+      value: 
+      objectReference: {fileID: 11400000, guid: 1b35af1c8faf72b4192db51f73743d9a, type: 2}
     - target: {fileID: 6996996619921931287, guid: 763d73dd2ccd2504bb1a96289df51485, type: 3}
       propertyPath: m_Pivot.x
       value: 0
