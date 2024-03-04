@@ -83,65 +83,6 @@ public class Animal : MonoBehaviour, IDamagable
             stateMachine.Update();
         }
     }
-    /*
-    protected void SetState(AIState newState)
-    {
-        aiState = newState;
-        switch (aiState)
-        {
-            case AIState.Idle:
-                {
-                    agent.speed = data.walkSpeed;
-                    agent.isStopped = true;
-                }
-                break;
-            case AIState.Wandering:
-                {
-                    agent.speed = data.walkSpeed;
-                    agent.isStopped = false;
-                }
-                break;
-
-            case AIState.Attacking:
-                {
-                    agent.speed = data.runSpeed;
-                    agent.isStopped = false;
-                }
-                break;
-            case AIState.RunAway:
-                {
-                    agent.speed = data.runSpeed;
-                    agent.isStopped = false;
-                }
-                break;
-            case AIState.Fleeing:
-                {
-                    agent.speed = data.runSpeed;
-                    agent.isStopped = false;
-                }
-                break;
-        }
-
-        animator.speed = agent.speed / data.walkSpeed;
-    }
-    *///SetState();
-    
-
-    //public void PassiveUpdate()
-    //{
-    //    if (agent.remainingDistance < 0.1f)
-    //    {
-    //        stateMachine.ChangeState(stateMachine.idleState);
-    //        //SetState(AIState.Idle);
-    //        Invoke("WanderToNewLocation", Random.Range(data.minWanderWaitTime, data.maxWanderWaitTime));
-    //    }
-
-    //    if (playerDistance < data.detectDistance)
-    //    {
-    //        stateMachine.ChangeState(stateMachine.attackState);
-    //        //SetState(AIState.Attacking);
-    //    }
-    //}
 
     Vector3 GetWanderLocation()
     {

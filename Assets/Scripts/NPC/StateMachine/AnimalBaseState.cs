@@ -64,7 +64,7 @@ public class AnimalBaseState : IState
 
     public void PlayerSearch()
     {
-        if (stateMachine.animal.playerDistance < stateMachine.animal.data.detectDistance)
+        if(IsPlaterInFireldOfView() && stateMachine.animal.playerDistance < stateMachine.animal.data.detectDistance)
         {
             if (stateMachine.animal.data.isHostile)
             {
@@ -77,26 +77,18 @@ public class AnimalBaseState : IState
                     stateMachine.animal.StartCoroutine(stateMachine.AnimationCoroutine);
                 }
             }
+            else
+            {
+                stateMachine.ChangeState(stateMachine.runAwayState);
+            }
         }
     }
-    
+    protected bool IsPlaterInFireldOfView()
+    {
+        Animal animal = stateMachine.animal;
 
-    //protected float GetNormalizedTime(Animator animator, string tag)
-    //{
-    //    AnimatorStateInfo currentInfo = animator.GetCurrentAnimatorStateInfo(0);
-    //    AnimatorStateInfo nextInfo = animator.GetNextAnimatorStateInfo(0);
-
-    //    if (animator.IsInTransition(0) && nextInfo.IsTag(tag))
-    //    {
-    //        return nextInfo.normalizedTime;
-    //    }
-    //    else if (!animator.IsInTransition(0) && currentInfo.IsTag(tag))
-    //    {
-    //        return currentInfo.normalizedTime;
-    //    }
-    //    else
-    //    {
-    //        return 0f;
-    //    }
-    //}
+        Vector3 directionToPlayer = animal.playerPos - animal.transform.position;
+        float angle = Vector3.Angle(animal.transform.forward, directionToPlayer);
+        return angle < animal.data.fieldOfView * 0.5f;
+    }
 }

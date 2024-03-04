@@ -10,24 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de2eeff99340cf74eaab95fa84d3fbd2, type: 3}
-  m_Name: Bear
+  m_Name: Deer
   m_EditorClassIdentifier: 
-  AnimalID: 0
-  name: Bear
-  maxHealth: 6
+  AnimalID: 1
+  name: Deer
+  maxHealth: 20
   walkSpeed: 1
   runSpeed: 8
   dropOnDeath:
   - {fileID: 11400000, guid: 1b8110232980d6e469ed5a93781e00c2, type: 2}
-  isHostile: 1
-  detectDistance: 10
+  - {fileID: 11400000, guid: 6b884bc85bec25a41b38adf337a02d9c, type: 2}
+  isHostile: 0
+  detectDistance: 8
   safeDistance: 8
   fieldOfView: 120
   minWanderDistance: 5
   maxWanderDistance: 10
-  minWanderWaitTime: 1
-  maxWanderWaitTime: 5
-  damage: 5
-  attackRate: 1.5
+  minWanderWaitTime: 4
+  maxWanderWaitTime: 12
+  damage: 1
+  attackRate: 2
   attackDistance: 2
   deathToTime: 2
