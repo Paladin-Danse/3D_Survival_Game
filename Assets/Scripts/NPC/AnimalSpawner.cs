@@ -1,27 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem.HID;
 
 public class AnimalSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject Enviroment;
+    private static AnimalSpawner m_Instance;
+    public static AnimalSpawner Instance
+    {
+        get
+        {
+            if (m_Instance == null)
+                m_Instance = GameObject.FindObjectOfType<AnimalSpawner>();
+            return m_Instance;
+        }
+    }
+
+    [SerializeField] private GameObject environment;
+    [SerializeField] private int SpawnAnimalCount;
     private GameObject[] animals;
-    private int SpawnAnimalCount;
     private List<GameObject> animalList;
 
     float AnimalSpawnTime = 0f;
 
     private void Awake()
     {
-        if (Enviroment == null) Enviroment = GameObject.Find("_Enviroments");
+        if (environment == null) environment = GameObject.Find("_Environments");
         animals = Resources.LoadAll<GameObject>("Prefabs/Animal").ToArray();
     }
 
     void Start()
     {
+        animalList = new List<GameObject>();
+
         for (int i = 0; i < SpawnAnimalCount; i++)
         {
             StartCoroutine(AnimalSpawnCoroutine());
@@ -38,9 +52,10 @@ public class AnimalSpawner : MonoBehaviour
     IEnumerator AnimalSpawnCoroutine()
     {
         NavMeshHit hit;
+        Vector3 boundsSize = environment.GetComponentInChildren<MeshFilter>().mesh.bounds.size;
 
-        float RandomPosX = Enviroment.transform.position.x + Enviroment.transform.localScale.x * 0.5f;
-        float RandomPosZ = Enviroment.transform.position.z + Enviroment.transform.localScale.z * 0.5f;
+        float RandomPosX = environment.transform.position.x + boundsSize.x * 0.5f;
+        float RandomPosZ = environment.transform.position.z + boundsSize.z * 0.5f;
 
         yield return new WaitForSeconds(AnimalSpawnTime);
 
