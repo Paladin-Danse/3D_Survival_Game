@@ -2770,6 +2770,7 @@ MonoBehaviour:
   - Bdata: {fileID: 11400000, guid: 2e0db85c80409d046a02729f7f00332b, type: 2}
   - Bdata: {fileID: 11400000, guid: 9e87afb6113923e4db14e3eda13e4ef8, type: 2}
   - Bdata: {fileID: 11400000, guid: 251d8d610c35c8f47a4835774b74eae4, type: 2}
+  - Bdata: {fileID: 11400000, guid: 1b35af1c8faf72b4192db51f73743d9a, type: 2}
   go_Preview: {fileID: 102149307270144720, guid: 71803cfd2cad2b041b61033bccdb267d, type: 3}
   go_Prefab: {fileID: 0}
   Player_pos: {fileID: 963194228}

@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ece41e17ec3cdf841b0103411aa9f6bb, type: 3}
   m_Name: WoodenWell
   m_EditorClassIdentifier: 
-  BuildingName: 
-  description: 
-  icon: {fileID: 0}
-  build_Prefab: {fileID: 0}
-  preview_Prefab: {fileID: 0}
-  buildingNumber: 0
-  ingredientItem: []
+  BuildingName: "\uB098\uBB34 \uC6B0\uBB3C"
+  description: "\uB098\uBB34\uB85C \uC9C0\uC740 \uC6B0\uBB3C"
+  icon: {fileID: 21300000, guid: ba2b90461b2e4b04fa3f4fd2434c15d7, type: 3}
+  build_Prefab: {fileID: 1150690222854054928, guid: c9fea52b33a380341808be2246f5acf8, type: 3}
+  preview_Prefab: {fileID: 6297409794948628024, guid: 12885979f25038643af03c0dd6c2f877, type: 3}
+  buildingNumber: 4
+  ingredientItem:
+  - ingreItem: {fileID: 11400000, guid: c2ab6602065c4e14485fc0966b1141e9, type: 2}
+    ingreItemCount: 3
