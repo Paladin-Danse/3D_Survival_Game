@@ -97,7 +97,7 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(ItemData item)
     {
-        //ÀÎº¥Åä¸®¿¡ ÀÌ¹Ì ¾ÆÀÌÅÛÀÌ ÀÖ°í ´õ Ã¤¿ï ¼ö ÀÖÀ» ¶§
+        //ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ Ã¤ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         if(item.canStack)
         {
             ItemSlot slotToStackTo = GetItemStack(item);
@@ -110,7 +110,7 @@ public class Inventory : MonoBehaviour
         }
         
         ItemSlot emptySlot = GetEmptySlot();
-        //ÀÎº¥Åä¸®¿¡ ºó °ø°£ÀÌ ÀÖÀ» ¶§
+        //ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         if(emptySlot != null)
         {
             emptySlot.item = item;
@@ -213,6 +213,9 @@ public class Inventory : MonoBehaviour
                         break;
                     case ConsumableType.Health:
                         condition.Heal(selectedItem.item.consumables[i].value);
+                        break;
+                    case ConsumableType.Thirst:
+                        condition.Drink(selectedItem.item.consumables[i].value);
                         break;
                     default:
                         break;
