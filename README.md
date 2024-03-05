@@ -34,10 +34,32 @@ Language : C#
 
 # 와이어 프레임
 
+![wireFrame.PNG](https://github.com/Paladin-Danse/3D_Survival_Game/blob/main/wireFrame.PNG)
+
 
 # 구성
 
+### introScene
 
+![introScene.PNG](https://github.com/Paladin-Danse/3D_Survival_Game/blob/main/introScene.PNG)
+
+
+### mainScene
+
+![mainScene.PNG](https://github.com/Paladin-Danse/3D_Survival_Game/blob/main/mainScene.PNG)
+
+
+### monster
+
+![monster.PNG](https://github.com/Paladin-Danse/3D_Survival_Game/blob/main/monster.PNG)
+
+
+### crafting
+
+![crafting_1.PNG](https://github.com/Paladin-Danse/3D_Survival_Game/blob/main/crafting_1.PNG)
+
+
+![crafting_2.PNG](https://github.com/Paladin-Danse/3D_Survival_Game/blob/main/crafting_2.PNG)
 
 
 # 구현 사항
