@@ -61,16 +61,16 @@ public class AnimalSpawner : MonoBehaviour
 
         if (NavMesh.SamplePosition(new Vector3(Random.Range(-RandomPosX, RandomPosX), 0, Random.Range(-RandomPosZ, RandomPosZ)), out hit, 10f, NavMesh.AllAreas))
         {
+            GameObject RandomAnimal = animals[Random.Range(0, animals.Length)];
             GameObject obj = animalList.Find(animal => animal.activeSelf == false);
-            if (obj != null)
+            
+            if (obj != null && obj.transform.GetChild(0).GetComponent<Animal>().data.AnimalID == RandomAnimal.transform.GetChild(0).GetComponent<Animal>().data.AnimalID)
             {
                 obj.transform.position = hit.position;
                 obj.SetActive(true);
             }
             else
             {
-                GameObject RandomAnimal = animals[Random.Range(0, animals.Length)];
-
                 animalList.Add(Instantiate(RandomAnimal, hit.position, RandomAnimal.transform.rotation));
             }
         }
